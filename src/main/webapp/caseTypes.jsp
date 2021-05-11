@@ -14,9 +14,9 @@
 		<caption> List of Cases</caption>
 		<thead>
 		<tr>
-		<th>S.No</th>
-		<th>Case Name</th>
-		<th>Cost</th>
+		<th id="serialnumber">S.No</th> 
+		<th id="casename">Case Name</th>
+		<th id="cost">Cost</th>
 		</tr>
 		</thead>
 		<tbody>
