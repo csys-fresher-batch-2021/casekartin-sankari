@@ -12,7 +12,11 @@ public class CaseManagerModel {
 
 	private String caseType;
 	private Float cost;
-
+	
+	private CaseManagerModel()
+	{
+		//default constructor
+	}
 	//Create constructor for service class
 	public CaseManagerModel(String caseType, Float cost) {
 		super();
