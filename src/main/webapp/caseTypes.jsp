@@ -1,8 +1,8 @@
 <%@page import="java.util.Set" %>
 <%@page import="in.casekartin.service.CaseManagerService" %>
 <%@page import="in.casekartin.model.CaseManagerModel" %>
-
-<html>
+<!DOCTYPE html>
+<html lang="en" >
 <head>
 <title>CaseKartin App</title>
 </head>
@@ -11,6 +11,7 @@
 	<main class="container-fluid">
 		<h3>List Of Cases</h3>
 		<table class="table table-bordered">
+		<caption> List of Cases</caption>
 		<thead>
 		<tr>
 		<th>S.No</th>
