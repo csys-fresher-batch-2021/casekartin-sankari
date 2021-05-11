@@ -28,8 +28,8 @@
 		%>
 		<tr>
 		<td><%=i %></td>
-		<td><%=cases.caseType %></td>
-		<td>Rs.<%=cases.cost %>/-</td>
+		<td><%=cases.getCaseType() %></td>
+		<td>Rs.<%=cases.getCost() %>/-</td>
 		</tr>
 		<%i++;} %>
 		</tbody>

@@ -2,8 +2,17 @@ package in.casekartin.model;
 
 //create a service class
 public class CaseManagerModel {
-	public String caseType;
-	public Float cost;
+	public String getCaseType() {
+		return caseType;
+	}
+
+	public Float getCost() {
+		return cost;
+	}
+
+	private String caseType;
+	private Float cost;
+
 	//Create constructor for service class
 	public CaseManagerModel(String caseType, Float cost) {
 		super();

@@ -12,7 +12,7 @@ public class CaseManagerService {
 	 * Create the hash set for storing case types
 	 * hash set is used to ignore the duplicate case types
 	 */
-	private static Set<CaseManagerModel> caseTypes = new HashSet<CaseManagerModel>();
+	private static final Set<CaseManagerModel> caseTypes = new HashSet<CaseManagerModel>();
 	static {
 		
 		// add the case types with  to the hash Map
