@@ -3,10 +3,12 @@ package app;
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
+import java.util.Set;
 
 import org.junit.Test;
 
-import in.casekartin.service.CaseManager;
+import in.casekartin.model.CaseManagerModel;
+import in.casekartin.service.CaseManagerService;
 
 public class CaseManagerTest {
 
@@ -15,7 +17,7 @@ public class CaseManagerTest {
 	 */
 	@Test
 	public void numberOfCaseTypesTest() {
-		HashMap<String, Float> caseTypes = CaseManager.getCaseTypes();
+		Set<CaseManagerModel> caseTypes = CaseManagerService.getCaseTypes();
 		assertEquals(7,caseTypes.size());
 	}
 
