@@ -9,8 +9,8 @@ import in.casekartin.model.CaseManagerModel;
 public class CaseManagerService {
 	
 	/**
-	 * Create the hash map for storing case types
-	 * In hash map CaseType as a key and cost as a value
+	 * Create the hash set for storing case types
+	 * hash set is used to ignore the duplicate case types
 	 */
 	private static Set<CaseManagerModel> caseTypes = new HashSet<CaseManagerModel>();
 	static {

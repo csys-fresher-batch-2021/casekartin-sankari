@@ -19,7 +19,7 @@
 		</tr>
 		</thead>
 		<tbody>
-		<!-- Scriptlets(java code) -->
+		<!-- Scriptlets(java code for display the list of case types) -->
 		<%
 		Set<CaseManagerModel> caseTypes = CaseManagerService.getCaseTypes();
 				int i=1;
