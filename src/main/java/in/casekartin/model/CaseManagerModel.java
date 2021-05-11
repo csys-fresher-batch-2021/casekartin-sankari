@@ -1,9 +1,10 @@
 package in.casekartin.model;
 
+//create a service class
 public class CaseManagerModel {
 	public String caseType;
 	public Float cost;
-	//Create constructor for domain class
+	//Create constructor for service class
 	public CaseManagerModel(String caseType, Float cost) {
 		super();
 		this.caseType = caseType;
