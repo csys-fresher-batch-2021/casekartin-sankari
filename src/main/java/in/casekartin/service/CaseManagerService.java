@@ -8,6 +8,12 @@ import in.casekartin.model.CaseManagerModel;
 
 public class CaseManagerService {
 	
+	
+	private CaseManagerService()
+	{
+		//default constructor
+	}
+	
 	/**
 	 * Create the hash set for storing case types
 	 * hash set is used to ignore the duplicate case types
