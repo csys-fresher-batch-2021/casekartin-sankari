@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import in.casekartin.model.CaseManagerModel;
+import in.casekartin.model.CaseManager;
 import in.casekartin.service.CaseManagerService;
 
 public class CaseManagerTest {
@@ -17,7 +17,7 @@ public class CaseManagerTest {
 	 */
 	@Test
 	public void numberOfCaseTypesTest() {
-		Set<CaseManagerModel> caseTypes = CaseManagerService.getCaseTypes();
+		Set<CaseManager> caseTypes = CaseManagerService.getCaseTypes();
 		assertEquals(7,caseTypes.size());
 	}
 

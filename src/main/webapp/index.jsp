@@ -1,7 +1,7 @@
 
 <html>
 <head>
-<title>MyApp</title>
+<title>CaseKartinApp</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>

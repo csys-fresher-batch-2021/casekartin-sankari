@@ -1,7 +1,7 @@
 package in.casekartin.model;
 
 //create a service class
-public class CaseManagerModel {
+public class CaseManager {
 	public String getCaseType() {
 		return caseType;
 	}
@@ -12,19 +12,15 @@ public class CaseManagerModel {
 
 	private String caseType;
 	private Float cost;
-	
-	private CaseManagerModel()
-	{
-		//default constructor
-	}
-	//Create constructor for service class
-	public CaseManagerModel(String caseType, Float cost) {
+
+	// Create constructor for service class
+	public CaseManager(String caseType, Float cost) {
 		super();
 		this.caseType = caseType;
 		this.cost = cost;
 	}
-	
-	//to string method is used to return the case Types
+
+	// to string method is used to return the case Types
 	@Override
 	public String toString() {
 		return "CaseManagerModel [caseType=" + caseType + ", cost=" + cost + "]";
