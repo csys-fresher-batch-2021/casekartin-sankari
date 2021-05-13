@@ -7,18 +7,22 @@ import in.casekartin.model.CaseManager;
 import in.casekartin.service.CaseManagerService;
 
 public class CaseManagerValidator {
+	private CaseManagerValidator() {
+		// default constructor
+	}
+
 	/**
-	 * validate if case name is null or not & if case name is empty space or not 
-	 * check whether the case name has minimum 3 character,alphabets & numbers 
-	 * if case name is already exist or not
+	 * validate if case name is null or not & if case name is empty space or not
+	 * check whether the case name has minimum 3 character,alphabets & numbers if
+	 * case name is already exist or not
 	 * 
 	 * @param caseName
 	 * @return
 	 */
 	public static boolean caseNameValidator(String caseName) {
-		boolean isValid=false;
-		if (!caseName.equals("null") && !caseName.trim().equals("") && Pattern.matches("[a-zA-Z0-9]{3,}", caseName)) {
-			isValid=true;
+		boolean isValid = false;
+		if (!caseName.equals("null") && !caseName.trim().equals("") && Pattern.matches("[a-zA-Z0-9\s]{3,}", caseName)) {
+			isValid = true;
 		}
 		return isValid;
 	}
@@ -30,9 +34,9 @@ public class CaseManagerValidator {
 	 * @return
 	 */
 	public static boolean costValidator(Float cost) {
-		boolean isValid=false;
+		boolean isValid = false;
 		if (cost >= 100) {
-			isValid=true;
+			isValid = true;
 		}
 		return isValid;
 	}
@@ -45,11 +49,15 @@ public class CaseManagerValidator {
 	 */
 	public static boolean isNotExist(String caseName) {
 		Set<CaseManager> caseTypes = CaseManagerService.getCaseTypes();
+		boolean isValid = true;
+
 		for (CaseManager cases : caseTypes) {
 			if (cases.getCaseType().equalsIgnoreCase(caseName)) {
-				throw new RuntimeException("Case Name is Already Exist");
+				isValid = false;
 			}
 		}
-		return true;
+
+		return isValid;
+
 	}
 }
