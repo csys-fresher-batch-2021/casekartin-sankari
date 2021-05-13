@@ -16,9 +16,10 @@ import in.casekartin.service.CaseManagerService;
 @WebServlet("/AddCaseTypeServlet")
 public class AddCaseTypeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// get the form value
 		String caseName = request.getParameter("caseName");
 		String cost = request.getParameter("cost");

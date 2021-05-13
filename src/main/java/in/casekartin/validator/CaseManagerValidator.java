@@ -16,10 +16,11 @@ public class CaseManagerValidator {
 	 * @return
 	 */
 	public static boolean caseNameValidator(String caseName) {
+		boolean isValid=false;
 		if (!caseName.equals("null") && !caseName.trim().equals("") && Pattern.matches("[a-zA-Z0-9]{3,}", caseName)) {
-			return true;
+			isValid=true;
 		}
-		return false;
+		return isValid;
 	}
 
 	/**
@@ -29,10 +30,11 @@ public class CaseManagerValidator {
 	 * @return
 	 */
 	public static boolean costValidator(Float cost) {
+		boolean isValid=false;
 		if (cost >= 100) {
-			return true;
+			isValid=true;
 		}
-		return false;
+		return isValid;
 	}
 
 	/**

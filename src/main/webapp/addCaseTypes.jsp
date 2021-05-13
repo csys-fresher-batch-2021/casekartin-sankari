@@ -8,7 +8,6 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 		<h3>Add Case Type</h3>
-		<!-- <form action="addproduct_action.jsp">-->
 		<form action="AddCaseTypeServlet">
 			<label for="caseName">Case Name</label> <input type="text"
 				name="caseName" placeholder="Enter case Name" required autofocus />

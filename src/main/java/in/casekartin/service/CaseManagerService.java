@@ -62,8 +62,6 @@ public class CaseManagerService {
 				&& CaseManagerValidator.isNotExist(caseName)) {
 			CaseManager case0 = new CaseManager(caseName.toUpperCase(), price);
 			caseTypes.add(case0);
-
-			System.out.println("Added Successfully");
 			return true;
 		}
 		return false;

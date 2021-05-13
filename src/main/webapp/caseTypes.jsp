@@ -38,7 +38,6 @@
 				%>
 			</tbody>
 		</table>
-		<!--  TODO: Only Admin should be able to view this link -->
 		<a href="addCaseTypes.jsp">Add Case Type</a>
 	</main>
 </body>
