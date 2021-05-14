@@ -26,7 +26,7 @@ public class CaseManagerValidatorTest {
 	 */
 	@Test
 	public void caseNameLengthChecking() {
-		String caseName = "";
+		String caseName = "l";
 		boolean isNameValid = CaseManagerValidator.caseNameValidator(caseName);
 		assertEquals(false, isNameValid);
 	}
@@ -46,7 +46,7 @@ public class CaseManagerValidatorTest {
 	 */
 	@Test
 	public void caseCostValidation() {
-		Float cost = 99f;
+		Float cost = 0f;
 		boolean isNameValid = CaseManagerValidator.costValidator(cost);
 		assertEquals(false, isNameValid);
 	}

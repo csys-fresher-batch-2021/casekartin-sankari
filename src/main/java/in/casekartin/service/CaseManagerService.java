@@ -9,6 +9,7 @@ import in.casekartin.validator.CaseManagerValidator;
 
 public class CaseManagerService {
 
+	
 	private CaseManagerService() {
 		// default constructor
 	}
@@ -35,7 +36,6 @@ public class CaseManagerService {
 		caseTypes.add(case6);
 		CaseManager case7 = new CaseManager("NEON SAND GLOW", 749.0f);
 		caseTypes.add(case7);
-
 	}
 
 	/**
