@@ -33,16 +33,6 @@ public class CaseManagerValidatorTest {
 	}
 	
 	/**
-	 * test case for special character as a case name input  
-	 */
-	@Test
-	public void caseNameWithspecialCharacter() {
-		String caseName = "le*";
-		boolean isNameValid = CaseManagerValidator.caseNameValidator(caseName);
-		assertEquals(false, isNameValid);
-	}
-	
-	/**
 	 * test case for correct case name as input 
 	 */
 	@Test

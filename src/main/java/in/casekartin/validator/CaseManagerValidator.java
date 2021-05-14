@@ -1,7 +1,6 @@
 package in.casekartin.validator;
 
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import in.casekartin.model.CaseManager;
 import in.casekartin.service.CaseManagerService;
@@ -32,7 +31,7 @@ public class CaseManagerValidator {
 		int i = 0;
 		while ((i <= caseName.length() - 1) && (caseName.length() >= 3)) {
 			if ((caseName.charAt(i) >= 'A' && caseName.charAt(i) <= 'Z')
-					|| (caseName.charAt(i) >= 'A' && caseName.charAt(i) <= 'Z') || caseName.charAt(i) == ' ') {
+					|| (caseName.charAt(i) >= 'a' && caseName.charAt(i) <= 'z') || caseName.charAt(i) == ' ') {
 				isValid = true;
 			}
 			i++;
