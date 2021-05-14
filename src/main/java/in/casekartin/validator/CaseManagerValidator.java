@@ -21,7 +21,7 @@ public class CaseManagerValidator {
 	 */
 	public static boolean caseNameValidator(String caseName) {
 		boolean isValid = false;
-		if (!caseName.equals("null") && !caseName.trim().equals("") && Pattern.matches("[a-zA-Z0-9\s]{3,}", caseName)) {
+		if (!caseName.equals("null") && !caseName.trim().equals("") && Pattern.matches("[a-zA-Z0-9]{3,}", caseName)) {
 			isValid = true;
 		}
 		return isValid;
