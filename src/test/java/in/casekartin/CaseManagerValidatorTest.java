@@ -21,22 +21,33 @@ public class CaseManagerValidatorTest {
 		assertEquals(7, caseTypes.size());
 	}
 
+	
 	/**
-	 * test case for case name length validation
+	 * test case for case name length validation 
 	 */
 	@Test
-	public void caseNameLengthChecking() {
-		String caseName = "l";
+	public void caseNameWithWrongLength() {
+		String caseName = "le";
 		boolean isNameValid = CaseManagerValidator.caseNameValidator(caseName);
 		assertEquals(false, isNameValid);
 	}
-
+	
 	/**
-	 * test case for checking correct case name
+	 * test case for special character as a case name input  
 	 */
 	@Test
-	public void caseName() {
-		String caseName = "led";
+	public void caseNameWithspecialCharacter() {
+		String caseName = "le*";
+		boolean isNameValid = CaseManagerValidator.caseNameValidator(caseName);
+		assertEquals(false, isNameValid);
+	}
+	
+	/**
+	 * test case for correct case name as input 
+	 */
+	@Test
+	public void caseNameWithCorrectInput() {
+		String caseName = "led case";
 		boolean isNameValid = CaseManagerValidator.caseNameValidator(caseName);
 		assertEquals(true, isNameValid);
 	}
