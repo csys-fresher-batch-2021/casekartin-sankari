@@ -5,9 +5,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import in.casekartin.model.CaseManager;
+import in.casekartin.validator.CaseManagerValidator;
 
 public class CaseManagerService {
 
+	
 	private CaseManagerService() {
 		// default constructor
 	}
@@ -19,7 +21,7 @@ public class CaseManagerService {
 	private static final Set<CaseManager> caseTypes = new HashSet<>();
 	static {
 
-		// add the case types with to the hash Map
+		// add the case types to the hash Set
 		CaseManager case1 = new CaseManager("POLYCARBONATE", 300.0f);
 		caseTypes.add(case1);
 		CaseManager case2 = new CaseManager("LEATHER", 500.0f);
@@ -34,7 +36,6 @@ public class CaseManagerService {
 		caseTypes.add(case6);
 		CaseManager case7 = new CaseManager("NEON SAND GLOW", 749.0f);
 		caseTypes.add(case7);
-
 	}
 
 	/**
@@ -45,6 +46,25 @@ public class CaseManagerService {
 	 */
 	public static Set<CaseManager> getCaseTypes() {
 		return caseTypes;
+
+	}
+
+	/**
+	 * method for add the case name to set
+	 * 
+	 * @param caseName
+	 * @param cost
+	 * @return
+	 */
+	public static boolean addCaseType(String caseName, String cost) {
+		Float price = Float.parseFloat(cost);
+		if (CaseManagerValidator.isValidCaseName(caseName) && CaseManagerValidator.isValidCost(price)
+				&& CaseManagerValidator.isCaseNameNotExist(caseName)) {
+			CaseManager newCase = new CaseManager(caseName.toUpperCase(), price);
+			caseTypes.add(newCase);
+			return true;
+		}
+		return false;
 
 	}
 

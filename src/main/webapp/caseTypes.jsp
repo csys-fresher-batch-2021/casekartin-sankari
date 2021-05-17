@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>CaseKartin App</title>
+<title>Display Case Name</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -29,8 +29,8 @@
 				<tr>
 					<td><%=i%></td>
 					<td><%=cases.getCaseType()%></td>
-					<td>Rs.<%=cases.getCost()%>/-
-					</td>
+					<td>Rs.<%=cases.getCost()%>/-</td>
+			
 				</tr>
 				<%
 				i++;
@@ -38,6 +38,7 @@
 				%>
 			</tbody>
 		</table>
+		<a href="addCaseTypes.jsp">Add Case Type</a>
 	</main>
 </body>
 </html>
