@@ -32,7 +32,7 @@ public class AddCaseTypeServlet extends HttpServlet {
 		try {
 			if (CaseManagerService.addCaseType(caseName, cost)) {
 				response.sendRedirect("caseTypes.jsp");
-			} else if (!CaseManagerValidator.isNotExist(caseName)) {
+			} else if (!CaseManagerValidator.isCaseNameNotExist(caseName)) {
 				String message = "Case Name is Already Exist";
 				response.sendRedirect(ERROR_MESSAGE + message);
 			} else {

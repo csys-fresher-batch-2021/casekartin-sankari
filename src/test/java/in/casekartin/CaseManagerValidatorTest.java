@@ -28,7 +28,7 @@ public class CaseManagerValidatorTest {
 	@Test
 	public void caseNameWithWrongLength() {
 		String caseName = "le";
-		boolean isNameValid = CaseManagerValidator.caseNameValidator(caseName);
+		boolean isNameValid = CaseManagerValidator.isValidCaseName(caseName);
 		assertEquals(false, isNameValid);
 	}
 	
@@ -38,7 +38,7 @@ public class CaseManagerValidatorTest {
 	@Test
 	public void caseNameWithCorrectInput() {
 		String caseName = "led case";
-		boolean isNameValid = CaseManagerValidator.caseNameValidator(caseName);
+		boolean isNameValid = CaseManagerValidator.isValidCaseName(caseName);
 		assertEquals(true, isNameValid);
 	}
 
@@ -48,7 +48,7 @@ public class CaseManagerValidatorTest {
 	@Test
 	public void caseCostValidation() {
 		Float cost = 0f;
-		boolean isNameValid = CaseManagerValidator.costValidator(cost);
+		boolean isNameValid = CaseManagerValidator.isValidCost(cost);
 		assertEquals(false, isNameValid);
 	}
 
@@ -58,7 +58,7 @@ public class CaseManagerValidatorTest {
 	@Test
 	public void caseNameIsNotExist() {
 		String caseName = "led";
-		boolean isNameValid = CaseManagerValidator.isNotExist(caseName);
+		boolean isNameValid = CaseManagerValidator.isCaseNameNotExist(caseName);
 		assertEquals(true, isNameValid);
 	}
 }

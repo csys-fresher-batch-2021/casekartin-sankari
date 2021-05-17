@@ -58,8 +58,8 @@ public class CaseManagerService {
 	 */
 	public static boolean addCaseType(String caseName, String cost) {
 		Float price = Float.parseFloat(cost);
-		if (CaseManagerValidator.caseNameValidator(caseName) && CaseManagerValidator.costValidator(price)
-				&& CaseManagerValidator.isNotExist(caseName)) {
+		if (CaseManagerValidator.isValidCaseName(caseName) && CaseManagerValidator.isValidCost(price)
+				&& CaseManagerValidator.isCaseNameNotExist(caseName)) {
 			CaseManager newCase = new CaseManager(caseName.toUpperCase(), price);
 			caseTypes.add(newCase);
 			return true;

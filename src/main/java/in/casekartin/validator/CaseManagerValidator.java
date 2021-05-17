@@ -18,7 +18,7 @@ public class CaseManagerValidator {
 	 * @param caseName
 	 * @return
 	 */
-	public static boolean caseNameValidator(String caseName) {
+	public static boolean isValidCaseName(String caseName) {
 		boolean isValid = false;
 		if (!caseName.equals("null") && !caseName.trim().equals("") && isCharAllowed(caseName)) {
 			isValid = true;
@@ -45,7 +45,7 @@ public class CaseManagerValidator {
 	 * @param cost
 	 * @return
 	 */
-	public static boolean costValidator(Float cost) {
+	public static boolean isValidCost(Float cost) {
 		boolean isValid = false;
 		if (cost > 0) {
 			isValid = true;
@@ -59,7 +59,7 @@ public class CaseManagerValidator {
 	 * @param caseName
 	 * @return
 	 */
-	public static boolean isNotExist(String caseName) {
+	public static boolean isCaseNameNotExist(String caseName) {
 		Set<CaseManager> caseTypes = CaseManagerService.getCaseTypes();
 		boolean isValid = true;
 
