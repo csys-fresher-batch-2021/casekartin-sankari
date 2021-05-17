@@ -41,7 +41,7 @@ public class AddCaseTypeServlet extends HttpServlet {
 				response.sendRedirect(ERROR_MESSAGE + message);
 
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			String message = e.getMessage();
 			response.sendRedirect(ERROR_MESSAGE + message);
 		}

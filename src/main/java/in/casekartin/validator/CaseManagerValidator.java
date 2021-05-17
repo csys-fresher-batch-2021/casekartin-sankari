@@ -40,7 +40,7 @@ public class CaseManagerValidator {
 	}
 
 	/**
-	 * check whether cost is greater than 100
+	 * check whether cost is greater than 0
 	 * 
 	 * @param cost
 	 * @return

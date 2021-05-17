@@ -21,7 +21,7 @@ public class CaseManagerService {
 	private static final Set<CaseManager> caseTypes = new HashSet<>();
 	static {
 
-		// add the case types with to the hash Map
+		// add the case types to the hash Set
 		CaseManager case1 = new CaseManager("POLYCARBONATE", 300.0f);
 		caseTypes.add(case1);
 		CaseManager case2 = new CaseManager("LEATHER", 500.0f);
@@ -60,8 +60,8 @@ public class CaseManagerService {
 		Float price = Float.parseFloat(cost);
 		if (CaseManagerValidator.caseNameValidator(caseName) && CaseManagerValidator.costValidator(price)
 				&& CaseManagerValidator.isNotExist(caseName)) {
-			CaseManager case0 = new CaseManager(caseName.toUpperCase(), price);
-			caseTypes.add(case0);
+			CaseManager newCase = new CaseManager(caseName.toUpperCase(), price);
+			caseTypes.add(newCase);
 			return true;
 		}
 		return false;
