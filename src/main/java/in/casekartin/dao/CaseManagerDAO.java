@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import in.casekartin.model.CaseManager;
-import in.casekartin.service.Cases;
 import in.casekartin.util.CaseManagerUtil;
 import in.casekartin.validator.CaseManagerValidator;
 
