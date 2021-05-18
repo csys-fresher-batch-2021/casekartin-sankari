@@ -6,6 +6,10 @@ import in.casekartin.dao.CaseManagerDAO;
 import in.casekartin.model.CaseManager;
 
 public class CaseManagerValidator {
+	private CaseManagerValidator()
+	{
+		//default constructor
+	}
 
 	/**
 	 * check whether case name is already exist or not

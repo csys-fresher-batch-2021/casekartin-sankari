@@ -1,6 +1,10 @@
 package in.casekartin.util;
 
 public class CaseManagerUtil {
+	private CaseManagerUtil()
+	{
+		//default constructor
+	}
 	/**
 	 * validate if case name is null or not & if case name is empty space or not
 	 * check whether the case name has minimum 3 character,alphabets & numbers if

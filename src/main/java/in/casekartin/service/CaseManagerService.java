@@ -2,6 +2,10 @@ package in.casekartin.service;
 
 import in.casekartin.dao.CaseManagerDAO;
 public class CaseManagerService {
+	private CaseManagerService()
+	{
+		//default constructor
+	}
 
 	/**
 	 * method for add the case name

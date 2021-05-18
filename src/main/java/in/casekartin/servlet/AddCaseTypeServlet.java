@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import in.casekartin.service.CaseManagerService;
-//import in.casekartin.validator.CaseManagerValidator;
 import in.casekartin.validator.CaseManagerValidator;
 
 /**
@@ -22,8 +21,6 @@ public class AddCaseTypeServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//		CaseManagerValidator caseManagerValidator=new CaseManagerValidator();
-
 		// get the form value
 		String caseName = request.getParameter("caseName");
 		String cost = request.getParameter("cost");
