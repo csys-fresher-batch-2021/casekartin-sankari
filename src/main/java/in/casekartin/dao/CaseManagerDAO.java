@@ -76,18 +76,11 @@ public class CaseManagerDAO {
 	 */
 	public static boolean deleteCase(String caseName) {
 		boolean isDeleted=false;
-		CaseManager searchCase =null;
-		for(CaseManager cases: caseTypes) {
-			if(cases.getCaseType().equalsIgnoreCase(caseName)) {
-				searchCase = cases;
-				break;
-			}
-		}
-		if(searchCase != null) {
+		CaseManager searchCase=CaseManagerValidator.isCaseNameExist(caseName); 
+		if(searchCase!=null) {
 			caseTypes.remove(searchCase);
 			isDeleted = true;
 		}
-
 		return isDeleted;
 	}
 

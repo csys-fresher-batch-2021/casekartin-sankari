@@ -24,10 +24,30 @@ public class CaseManagerValidator {
 		for (CaseManager cases : caseTypes) {
 			if (cases.getCaseType().equalsIgnoreCase(caseName)) {
 				isValid = false;
+				break;
 			}
 		}
 
 		return isValid;
+
+	}
+	/**
+	 * check whether case name is already exist or not
+	 * return caseName
+	 * @param caseName
+	 * @return
+	 */
+	public static CaseManager isCaseNameExist(String caseName) {
+		Set<CaseManager> caseTypes = CaseManagerDAO.getCaseTypes();
+		CaseManager searchCase =null;
+		for (CaseManager cases : caseTypes) {
+			if (cases.getCaseType().equalsIgnoreCase(caseName)) {
+				searchCase=cases;
+				break;
+			}
+		}
+
+		return searchCase;
 
 	}
 }

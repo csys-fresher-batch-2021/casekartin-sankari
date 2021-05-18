@@ -6,20 +6,23 @@ public class CaseManagerUtil {
 		//default constructor
 	}
 	/**
-	 * validate if case name is null or not & if case name is empty space or not
-	 * check whether the case name has minimum 3 character,alphabets & numbers if
-	 * case name is already exist or not
+	 * validate if name is null or not & if name is empty space or not
 	 * 
 	 * @param caseName
 	 * @return
 	 */
-	public static boolean isValidCaseName(String caseName) {
+	public static boolean isValidCaseName(String name) {
 		boolean isValid = false;
-		if (!caseName.equals("null") && !caseName.trim().equals("")) {
+		if (!name.equals("null") && !name.trim().equals("")) {
 			isValid = true;
 		}
 		return isValid;
 	}
+	/**
+	 * check whether the case name has minimum 3 character and alphabets and it may has number
+	 * @param caseName
+	 * @return
+	 */
 
 	public static boolean isCharAllowed(String caseName) {
 		boolean isValid = false;
