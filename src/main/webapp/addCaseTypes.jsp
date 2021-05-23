@@ -13,7 +13,7 @@
 				name="caseName" placeholder="Enter case Name" pattern="[a-zA-Z0-9\s]{3,}" required autofocus />
 			<br />
 			<br /> <label for="price">Price</label> <input type="number"
-				name="cost" placeholder="Enter cost of case" step=".01" min=1
+				name="cost" placeholder="Enter cost of case" step=".01"  min=1
 				required autofocus /> <br />
 			<br />
 			<button type="submit" class="btn btn-info">Submit</button>
