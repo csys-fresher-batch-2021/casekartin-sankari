@@ -2,7 +2,7 @@ package in.casekartin.validator;
 
 import java.util.Set;
 
-import javax.xml.bind.ValidationException;
+import in.casekartin.exception.ValidationException;
 import in.casekartin.model.CaseManager;
 import in.casekartin.service.CaseManagerService;
 

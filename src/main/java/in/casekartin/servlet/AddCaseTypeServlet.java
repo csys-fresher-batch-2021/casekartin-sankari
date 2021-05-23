@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import in.casekartin.Exception.ServiceException;
+import in.casekartin.exception.ServiceException;
 import in.casekartin.service.CaseManagerService;
 
 

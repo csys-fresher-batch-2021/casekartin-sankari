@@ -5,13 +5,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
-import javax.xml.bind.ValidationException;
+import in.casekartin.exception.ValidationException;
 import org.junit.Test;
 
-import in.casekartin.Exception.NumberException;
-import in.casekartin.Exception.ServiceException;
-import in.casekartin.Exception.StringException;
+import in.casekartin.exception.NumberException;
+import in.casekartin.exception.ServiceException;
+import in.casekartin.exception.StringException;
 import in.casekartin.service.CaseManagerService;
 import in.casekartin.util.StringNumberUtil;
 

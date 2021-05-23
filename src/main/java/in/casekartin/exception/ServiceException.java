@@ -1,4 +1,4 @@
-package in.casekartin.Exception;
+package in.casekartin.exception;
 
 public class ServiceException extends Exception {
 

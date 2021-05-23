@@ -1,7 +1,7 @@
 package in.casekartin.util;
 
-import in.casekartin.Exception.NumberException;
-import in.casekartin.Exception.StringException;
+import in.casekartin.exception.NumberException;
+import in.casekartin.exception.StringException;
 
 public class StringNumberUtil {
 	private StringNumberUtil() {

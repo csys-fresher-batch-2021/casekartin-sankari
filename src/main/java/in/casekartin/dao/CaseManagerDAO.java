@@ -28,7 +28,6 @@ public class CaseManagerDAO {
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, caseName);
 			pst.setFloat(2, price);
-			System.out.println(connection);
 
 			// Execute Query
 			int rows = pst.executeUpdate();
@@ -86,7 +85,6 @@ public class CaseManagerDAO {
 			pst.setString(1, caseName);
 			int rows = pst.executeUpdate();
 			boolean deleted = rows == 1 ? true : false;
-			System.out.println("isDeleted"+rows);
 			return deleted;
 		} catch (Exception e) {
 			throw new RuntimeException("Unable to delete case");
