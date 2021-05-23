@@ -33,35 +33,43 @@ public class ConnectionUtil {
 			connection =  DriverManager.getConnection(DB_URL,DB_USERNAME,DB_PASSWORD);
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException("Unable to connect database");
+			throw new Exception("Unable to connect database");
 		} 
 		return connection;
 	}
 	public static void close(Connection connection,PreparedStatement preparedStatement,ResultSet result) throws Exception
 	{
-		if(result!=null)
-		{
-			result.close();
-		}
-		if(preparedStatement!=null)
-		{
-			preparedStatement.close();
-		}
-		if(connection!=null)
-		{
-			connection.close();
+		
+		try {
+			if(result!=null)
+			{
+				result.close();
+			}
+			if(preparedStatement!=null)
+			{
+				preparedStatement.close();
+			}
+			if(connection!=null)
+			{
+				connection.close();
+			}
+		} catch (Exception e) {
+			throw new Exception("Connection is not closed");
 		}
 	}
 	public static void close(Connection connection,PreparedStatement preparedStatement) throws Exception
 	{
-		if(preparedStatement!=null)
-		{
-			preparedStatement.close();
-		}
-		if(connection!=null)
-		{
-			connection.close();
+		try {
+			if(preparedStatement!=null)
+			{
+				preparedStatement.close();
+			}
+			if(connection!=null)
+			{
+				connection.close();
+			}
+		} catch (Exception e) {
+			throw new Exception("Connection is not closed");
 		}	
 	}
 

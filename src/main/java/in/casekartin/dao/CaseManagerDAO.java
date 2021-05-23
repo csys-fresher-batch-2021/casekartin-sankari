@@ -41,7 +41,7 @@ public class CaseManagerDAO {
 			}
 			return inserted;
 		} catch (Exception e) {
-			throw new RuntimeException("Unable to add case");
+			throw new Exception("Unable to add case");
 		} finally {
 			ConnectionUtil.close(connection, pst);
 		}
@@ -91,10 +91,14 @@ public class CaseManagerDAO {
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, caseName);
 			int rows = pst.executeUpdate();
-			boolean deleted = rows == 1 ? true : false;
+			boolean deleted = false;
+			if(rows==1)
+			{
+				deleted=true;
+			}
 			return deleted;
 		} catch (Exception e) {
-			throw new RuntimeException("Unable to delete case");
+			throw new Exception("Unable to delete case");
 		}
 		finally {
 			ConnectionUtil.close(connection, pst);
