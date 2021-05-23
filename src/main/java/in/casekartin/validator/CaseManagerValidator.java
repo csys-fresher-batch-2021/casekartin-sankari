@@ -26,7 +26,7 @@ public class CaseManagerValidator {
 			
 			if (((caseName.charAt(i) >= 'A' && caseName.charAt(i) <= 'Z') 
 					|| (caseName.charAt(i) >= 'a' && caseName.charAt(i) <= 'z') || caseName.charAt(i) == ' ')&&
-					((caseName.length() >= 3))) 
+					(caseName.length() >= 3)) 
 			{
 				isValid = true;
 			}
@@ -46,12 +46,11 @@ public class CaseManagerValidator {
 	 * @return
 	 * @throws ValidationException 
 	 */
-	public static boolean isCaseNameNotExist(String caseName) throws ValidationException,Exception {
+	public static boolean isCaseNameNotExist(String caseName) throws ValidationException{
 		Set<CaseManager> caseTypes = CaseManagerService.getCaseTypes();
 		boolean searchCase =true;
 		for (CaseManager cases : caseTypes) {
 			if (cases.getCaseType().equalsIgnoreCase(caseName)) {
-				searchCase=false;
 				throw new ValidationException("Case Name is Already Exist");
 			}
 		}
@@ -63,7 +62,7 @@ public class CaseManagerValidator {
 	 * @param caseName
 	 * @return
 	 */
-	public static boolean isCaseNameExist(String caseName) throws Exception{
+	public static boolean isCaseNameExist(String caseName){
 		Set<CaseManager> caseTypes = CaseManagerService.getCaseTypes();
 		boolean searchCase =false;
 			for (CaseManager cases : caseTypes) {

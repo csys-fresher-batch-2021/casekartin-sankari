@@ -10,6 +10,9 @@ import in.casekartin.model.CaseManager;
 import in.casekartin.util.ConnectionUtil;
 
 public class CaseManagerDAO {
+	private CaseManagerDAO(){
+		//default constructor
+	}
 	/**
 	 * add the case name and price to database
 	 * @param caseName
@@ -31,7 +34,11 @@ public class CaseManagerDAO {
 
 			// Execute Query
 			int rows = pst.executeUpdate();
-			boolean inserted = rows == 1 ? true : false;
+			boolean inserted = false;
+			if(rows==1)
+			{
+				inserted=true;
+			}
 			return inserted;
 		} catch (Exception e) {
 			throw new RuntimeException("Unable to add case");
@@ -47,12 +54,12 @@ public class CaseManagerDAO {
 	public static Set<CaseManager> listAllCases() throws Exception {
 		Set<CaseManager> caseTypes = new HashSet<>();
 		Connection connection = null;
-		PreparedStatement pst = null;
+		PreparedStatement preparedStatement = null;
 		connection = ConnectionUtil.getConnection();
 		// Retrieve data from table
 		String sql = "select casename,price from caseTypes";
-		pst = connection.prepareStatement(sql);
-		ResultSet rs = pst.executeQuery();
+		preparedStatement = connection.prepareStatement(sql);
+		ResultSet rs = preparedStatement.executeQuery();
 		while (rs.next()) {
 			String caseName = rs.getString("casename");
 			Float price = rs.getFloat("price");
@@ -62,7 +69,7 @@ public class CaseManagerDAO {
 			// Store all products in list
 			caseTypes.add(product);
 		}
-		ConnectionUtil.close(connection, pst, rs);
+		ConnectionUtil.close(connection, preparedStatement, rs);
 		return caseTypes;
 	}
 	/**

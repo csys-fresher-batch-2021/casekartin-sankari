@@ -8,6 +8,10 @@ import java.sql.SQLException;
 
 
 public class ConnectionUtil {
+	private ConnectionUtil()
+	{
+		//default constructor
+	}
 
 	private static final String DRIVER_CLASS_NAME = "org.postgresql.Driver";
 	private static final String DATABASE_NAME = "case";
