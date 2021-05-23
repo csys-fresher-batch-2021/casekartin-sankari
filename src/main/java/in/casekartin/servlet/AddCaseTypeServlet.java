@@ -38,9 +38,6 @@ public class AddCaseTypeServlet extends HttpServlet {
 			e.printStackTrace();
 			String message = e.getMessage();
 			response.sendRedirect(ERROR_MESSAGE + message);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			
 		}
 	}
 }

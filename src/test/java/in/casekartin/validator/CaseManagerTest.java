@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import javax.xml.bind.ValidationException;
 import org.junit.Test;
 
@@ -23,9 +25,8 @@ public class CaseManagerTest {
 		String caseName = "le";
 		try {
 			CaseManagerValidator.isCharAllowed(caseName);
+			fail();
 		} catch (ValidationException e) {
-			assertEquals("Invalid Case Name", e.getMessage());
-			e.printStackTrace();
 		}
 	}
 
@@ -38,8 +39,6 @@ public class CaseManagerTest {
 		try {
 			CaseManagerValidator.isCharAllowed(caseName);
 		} catch (ValidationException e) {
-			assertEquals("Invalid Case Name", e.getMessage());
-			e.printStackTrace();
 		}
 	}
 
@@ -52,8 +51,6 @@ public class CaseManagerTest {
 		try {
 			StringNumberUtil.stringUtil(caseName);
 		} catch (StringException e) {
-			assertEquals("Invalid Case Name", e.getMessage());
-			e.printStackTrace();
 		}
 	}
 
@@ -65,9 +62,9 @@ public class CaseManagerTest {
 		String caseName = "null";
 		try {
 			StringNumberUtil.stringUtil(caseName);
+			fail();
 		} catch (StringException e) {
-			assertEquals("Invalid Case Name", e.getMessage());
-			e.printStackTrace();
+
 		}
 	}
 
@@ -77,10 +74,16 @@ public class CaseManagerTest {
 	 * @throws StringException
 	 */
 	@Test
-	public void caseNameWithCorrectInput() throws StringException {
+	public void caseNameWithCorrectInput() {
 		String caseName = "led case";
-		boolean isNameValid = StringNumberUtil.stringUtil(caseName);
-		assertTrue(isNameValid);
+		boolean isNameValid;
+		try {
+			isNameValid = StringNumberUtil.stringUtil(caseName);
+			assertTrue(isNameValid);
+		} catch (StringException e) {
+			fail();
+		}
+		
 	}
 
 	/**
@@ -89,13 +92,14 @@ public class CaseManagerTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void isExistingCaseNameAdded() throws Exception {
+	public void isExistingCaseNameAdded() {
 		String caseName = "leather Case";
 		String cost = "50";
 		try {
 			CaseManagerService.addCaseType(caseName, cost);
+			fail();
 		} catch (ServiceException e) {
-			assertEquals("Case Name is Already Exist", e.getMessage());
+			assertEquals("Case Name is Already Exist",e.getMessage());
 		}
 	}
 
@@ -106,12 +110,18 @@ public class CaseManagerTest {
 	 * @throws ServiceException
 	 */
 	@Test
-	public void isNotExistingCaseNameAdded() throws ServiceException, Exception {
+	public void isNotExistingCaseNameAdded() {
 		String caseName = "led";
 		String cost = "50";
 
-		boolean isAdded = CaseManagerService.addCaseType(caseName, cost);
-		assertTrue(isAdded);
+		boolean isAdded;
+		try {
+			isAdded = CaseManagerService.addCaseType(caseName, cost);
+			assertTrue(isAdded);
+		} catch (ServiceException e) {
+			fail();
+		}
+		
 
 	}
 
@@ -123,9 +133,8 @@ public class CaseManagerTest {
 		Float cost = 0f;
 		try {
 			StringNumberUtil.positiveNumberUtil(cost);
+			fail();
 		} catch (NumberException e) {
-			assertEquals("Invalid Cost", e.getMessage());
-			e.printStackTrace();
 		}
 	}
 
@@ -135,10 +144,16 @@ public class CaseManagerTest {
 	 * @throws NumberException
 	 */
 	@Test
-	public void caseCostWithCorrectInput() throws NumberException {
+	public void caseCostWithCorrectInput() {
 		Float cost = 50f;
-		boolean isNameValid = StringNumberUtil.positiveNumberUtil(cost);
-		assertTrue(isNameValid);
+		boolean isNameValid;
+		try {
+			isNameValid = StringNumberUtil.positiveNumberUtil(cost);
+			assertTrue(isNameValid);
+		} catch (NumberException e) {
+			fail();
+		}
+		
 	}
 
 	/**
@@ -147,10 +162,16 @@ public class CaseManagerTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void IscaseNameNotExist() throws Exception {
+	public void IscaseNameNotExist(){
 		String caseName = "Real 3D Cases";
-		boolean isExist = CaseManagerValidator.isCaseNameExist(caseName);
-		assertFalse(isExist);
+		boolean isExist;
+		try {
+			isExist = CaseManagerValidator.isCaseNameExist(caseName);
+			assertFalse(isExist);
+		} catch (Exception e) {
+			fail();
+		}
+		
 	}
 
 	/**
@@ -159,10 +180,16 @@ public class CaseManagerTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void IscaseNameExist() throws Exception {
+	public void IscaseNameExist(){
 		String caseName = "leather case";
-		boolean isExist = CaseManagerValidator.isCaseNameExist(caseName);
-		assertTrue(isExist);
+		boolean isExist;
+		try {
+			isExist = CaseManagerValidator.isCaseNameExist(caseName);
+			assertTrue(isExist);
+		} catch (Exception e) {
+			fail();
+		}
+		
 	}
 
 	/**
@@ -171,7 +198,7 @@ public class CaseManagerTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void IsCaseNameDeleted() throws Exception {
+	public void IsCaseNameDeleted(){
 		String caseName = "led";
 		boolean isNameValid = CaseManagerService.deleteCaseType(caseName);
 		assertTrue(isNameValid);

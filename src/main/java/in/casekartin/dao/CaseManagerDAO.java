@@ -9,7 +9,7 @@ import java.util.Set;
 import in.casekartin.model.CaseManager;
 import in.casekartin.util.ConnectionUtil;
 
-public class CaseManagerDAO1 {
+public class CaseManagerDAO {
 	/**
 	 * add the case name and price to database
 	 * @param caseName
@@ -89,7 +89,6 @@ public class CaseManagerDAO1 {
 			System.out.println("isDeleted"+rows);
 			return deleted;
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new RuntimeException("Unable to delete case");
 		}
 		finally {

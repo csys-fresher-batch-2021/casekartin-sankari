@@ -22,7 +22,6 @@ public class DeleteCaseTypeServlet extends HttpServlet {
 		
 		  //Get the case name to delete 
 		String caseName=request.getParameter("caseName");
-		  try {
 			if(CaseManagerService.deleteCaseType(caseName))
 			  {
 				  response.sendRedirect("caseTypes.jsp"); 
@@ -30,11 +29,6 @@ public class DeleteCaseTypeServlet extends HttpServlet {
 			  else
 			  {
 				  response.sendRedirect("/DeleteCaseTypeServlet"); 
-			  }
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		 
+			  }	 
 	}
 }

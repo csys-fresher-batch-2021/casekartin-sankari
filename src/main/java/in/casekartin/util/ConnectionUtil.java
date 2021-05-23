@@ -34,16 +34,31 @@ public class ConnectionUtil {
 		} 
 		return connection;
 	}
-	public static void close(Connection connection,PreparedStatement pst,ResultSet rs) throws Exception
+	public static void close(Connection connection,PreparedStatement preparedStatement,ResultSet result) throws Exception
 	{
-		rs.close();
-		pst.close();
-		connection.close();
+		if(result!=null)
+		{
+			result.close();
+		}
+		if(preparedStatement!=null)
+		{
+			preparedStatement.close();
+		}
+		if(connection!=null)
+		{
+			connection.close();
+		}
 	}
-	public static void close(Connection connection,PreparedStatement pst) throws Exception
+	public static void close(Connection connection,PreparedStatement preparedStatement) throws Exception
 	{
-		pst.close();
-		connection.close();
+		if(preparedStatement!=null)
+		{
+			preparedStatement.close();
+		}
+		if(connection!=null)
+		{
+			connection.close();
+		}	
 	}
 
 }
