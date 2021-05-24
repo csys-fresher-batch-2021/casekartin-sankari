@@ -54,12 +54,12 @@ public class CaseManagerDAO {
 	public static Set<CaseManager> listAllCases() throws Exception {
 		Set<CaseManager> caseTypes = new HashSet<>();
 		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+		PreparedStatement pst = null;
 		connection = ConnectionUtil.getConnection();
 		// Retrieve data from table
 		String sql = "select casename,price from caseTypes";
-		preparedStatement = connection.prepareStatement(sql);
-		ResultSet rs = preparedStatement.executeQuery();
+		pst = connection.prepareStatement(sql);
+		ResultSet rs = pst.executeQuery();
 		while (rs.next()) {
 			String caseName = rs.getString("casename");
 			Float price = rs.getFloat("price");
@@ -69,7 +69,7 @@ public class CaseManagerDAO {
 			// Store all products in list
 			caseTypes.add(product);
 		}
-		ConnectionUtil.close(connection, preparedStatement, rs);
+		ConnectionUtil.close(connection, pst, rs);
 		return caseTypes;
 	}
 	/**
