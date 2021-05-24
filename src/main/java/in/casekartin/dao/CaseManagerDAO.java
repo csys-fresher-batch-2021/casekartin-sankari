@@ -3,6 +3,7 @@ package in.casekartin.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,21 +56,28 @@ public class CaseManagerDAO {
 		Set<CaseManager> caseTypes = new HashSet<>();
 		Connection connection = null;
 		PreparedStatement pst = null;
-		connection = ConnectionUtil.getConnection();
-		// Retrieve data from table
-		String sql = "select casename,price from caseTypes";
-		pst = connection.prepareStatement(sql);
-		ResultSet rs = pst.executeQuery();
-		while (rs.next()) {
-			String caseName = rs.getString("casename");
-			Float price = rs.getFloat("price");
+		ResultSet rs=null;
+		try {
+			connection = ConnectionUtil.getConnection();
+			// Retrieve data from table
+			String sql = "select casename,price from caseTypes";
+			pst = connection.prepareStatement(sql);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				String caseName = rs.getString("casename");
+				Float price = rs.getFloat("price");
 
-			// Store the data in model
-			CaseManager product = new CaseManager(caseName, price);
-			// Store all products in list
-			caseTypes.add(product);
+				// Store the data in model
+				CaseManager product = new CaseManager(caseName, price);
+				// Store all products in list
+				caseTypes.add(product);
+			}
+		} catch (Exception e) {
+			throw new Exception("Unable to display case");
 		}
+		finally {
 		ConnectionUtil.close(connection, pst, rs);
+		}
 		return caseTypes;
 	}
 	/**
