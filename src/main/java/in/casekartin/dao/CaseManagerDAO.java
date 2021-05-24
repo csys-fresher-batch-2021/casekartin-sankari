@@ -22,38 +22,44 @@ public class CaseManagerDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public static boolean addCase(String caseName, Float price) throws SQLException,DBException {
+	public static boolean addCase(String caseName, Float price) throws DBException {
 		Connection connection = null;
 		PreparedStatement pst = null;
-		try {
 			// Get Connection
-			connection = ConnectionUtil.getConnection();
-			// prepare data
-			String sql = "insert into caseTypes(casename,price) values (?,?)";
-			pst = connection.prepareStatement(sql);
-			pst.setString(1, caseName);
-			pst.setFloat(2, price);
-
-			// Execute Query
-			int rows = pst.executeUpdate();
 			boolean inserted = false;
-			if(rows==1)
-			{
-				inserted=true;
+			try {
+				connection = ConnectionUtil.getConnection();
+				// prepare data
+				String sql = "insert into caseTypes(casename,price) values (?,?)";
+				pst = connection.prepareStatement(sql);
+				pst.setString(1, caseName);
+				pst.setFloat(2, price);
+
+				// Execute Query
+				int rows = pst.executeUpdate();
+				inserted = false;
+				if(rows==1)
+				{
+					inserted=true;
+				}
+			} catch (ClassNotFoundException |SQLException e) {
+				e.printStackTrace();
+				throw new DBException("Unable to add case");
+			} finally {
+				try {
+					ConnectionUtil.close(connection, pst);
+				} catch (SQLException e) {
+					throw new DBException("Connecion is null",e);
+				}
 			}
 			return inserted;
-		} catch (Exception e) {
-			throw new SQLException("Unable to add case");
-		} finally {
-			ConnectionUtil.close(connection, pst);
-		}
 	}
 	/**
 	 * Retrieve all data from database table 
 	 * @return
 	 * @throws Exception
 	 */
-	public static Set<CaseManager> listAllCases() throws DBException,SQLException {
+	public static Set<CaseManager> listAllCases() throws DBException {
 		Set<CaseManager> caseTypes = new HashSet<>();
 		Connection connection = null;
 		PreparedStatement pst = null;
@@ -61,23 +67,28 @@ public class CaseManagerDAO {
 		try {
 			connection = ConnectionUtil.getConnection();
 			// Retrieve data from table
-			String sql = "select casename,price from caseTypes";
+			String sql = "select casename,price from caseTypes where status='active'";
 			pst = connection.prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				String caseName = rs.getString("casename");
 				Float price = rs.getFloat("price");
+				System.out.println("casename"+caseName+"price"+price);
 
 				// Store the data in model
 				CaseManager product = new CaseManager(caseName, price);
 				// Store all products in list
 				caseTypes.add(product);
 			}
-		} catch (Exception e) {
-			throw new SQLException("Unable to display case");
+		} catch (ClassNotFoundException |SQLException e) {
+			throw new DBException("Unable to display case",e);
 		}
 		finally {
-		ConnectionUtil.close(connection, pst, rs);
+		try {
+			ConnectionUtil.close(connection, pst, rs);
+		} catch (SQLException e) {
+			throw new DBException("Connecion is null",e);
+		}
 		}
 		return caseTypes;
 	}
@@ -87,14 +98,14 @@ public class CaseManagerDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public static boolean deleteCase(String caseName) throws DBException,SQLException {
+	public static boolean deleteCase(String caseName) throws DBException {
 		Connection connection = null;
 		PreparedStatement pst = null;
 		try {
 			// Get Connection
 			connection = ConnectionUtil.getConnection();
 			// prepare data
-			String sql = "delete from caseTypes where casename=?";
+			String sql = "update caseTypes set status='inactive' WHERE casename=?";
 			
 			// Execute Query
 			pst = connection.prepareStatement(sql);
@@ -106,11 +117,15 @@ public class CaseManagerDAO {
 				deleted=true;
 			}
 			return deleted;
-		} catch (Exception e) {
-			throw new SQLException("Unable to delete case");
+		} catch (ClassNotFoundException |SQLException e) {
+			throw new DBException("Unable to delete case",e);
 		}
 		finally {
-			ConnectionUtil.close(connection, pst);
+			try {
+				ConnectionUtil.close(connection, pst);
+			} catch (SQLException e) {
+				throw new DBException("Connecion is null",e);
+			}
 		}
 		
 	}

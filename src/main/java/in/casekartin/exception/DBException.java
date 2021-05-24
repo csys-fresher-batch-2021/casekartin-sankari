@@ -6,4 +6,8 @@ public class DBException extends Exception {
 		super(string);
 	}
 
+	public DBException(String string, Exception e) {
+		super(string,e);
+	}
+
 }

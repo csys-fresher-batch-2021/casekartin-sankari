@@ -23,26 +23,21 @@ public class ConnectionUtil {
 	private static final int PORT = 5433;
 	private static final String DB_URL = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DATABASE_NAME;
 	
-	public static Connection getConnection() throws DBException{
+	public static Connection getConnection() throws SQLException, ClassNotFoundException{
 		Connection connection=null;
-		
-		try {
+
 			
 			//Step 1: Load the database driver in memory
 			Class.forName(DRIVER_CLASS_NAME);
 			
 			//Step 2: Get the connection from database
 			connection =  DriverManager.getConnection(DB_URL,DB_USERNAME,DB_PASSWORD);
-			
-		} catch (ClassNotFoundException | SQLException e) {
-			throw new DBException("Unable to connect database");
-		} 
+
 		return connection;
 	}
-	public static void close(Connection connection,PreparedStatement preparedStatement,ResultSet result) throws DBException
+	public static void close(Connection connection,PreparedStatement preparedStatement,ResultSet result) throws SQLException
 	{
-		
-		try {
+
 			if(result!=null)
 			{
 				result.close();
@@ -55,13 +50,9 @@ public class ConnectionUtil {
 			{
 				connection.close();
 			}
-		} catch (Exception e) {
-			throw new DBException("Connection is not closed");
-		}
 	}
-	public static void close(Connection connection,PreparedStatement preparedStatement) throws DBException
+	public static void close(Connection connection,PreparedStatement preparedStatement) throws SQLException
 	{
-		try {
 			if(preparedStatement!=null)
 			{
 				preparedStatement.close();
@@ -70,9 +61,6 @@ public class ConnectionUtil {
 			{
 				connection.close();
 			}
-		} catch (Exception e) {
-			throw new DBException("Connection is not closed");
-		}	
 	}
 
 }
