@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import in.casekartin.exception.DBException;
+
 
 public class ConnectionUtil {
 	private ConnectionUtil()
@@ -21,7 +23,7 @@ public class ConnectionUtil {
 	private static final int PORT = 5433;
 	private static final String DB_URL = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DATABASE_NAME;
 	
-	public static Connection getConnection() throws Exception{
+	public static Connection getConnection() throws DBException{
 		Connection connection=null;
 		
 		try {
@@ -33,11 +35,11 @@ public class ConnectionUtil {
 			connection =  DriverManager.getConnection(DB_URL,DB_USERNAME,DB_PASSWORD);
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new Exception("Unable to connect database");
+			throw new DBException("Unable to connect database");
 		} 
 		return connection;
 	}
-	public static void close(Connection connection,PreparedStatement preparedStatement,ResultSet result) throws Exception
+	public static void close(Connection connection,PreparedStatement preparedStatement,ResultSet result) throws DBException
 	{
 		
 		try {
@@ -54,10 +56,10 @@ public class ConnectionUtil {
 				connection.close();
 			}
 		} catch (Exception e) {
-			throw new Exception("Connection is not closed");
+			throw new DBException("Connection is not closed");
 		}
 	}
-	public static void close(Connection connection,PreparedStatement preparedStatement) throws Exception
+	public static void close(Connection connection,PreparedStatement preparedStatement) throws DBException
 	{
 		try {
 			if(preparedStatement!=null)
@@ -69,7 +71,7 @@ public class ConnectionUtil {
 				connection.close();
 			}
 		} catch (Exception e) {
-			throw new Exception("Connection is not closed");
+			throw new DBException("Connection is not closed");
 		}	
 	}
 

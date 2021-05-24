@@ -1,7 +1,9 @@
 package in.casekartin.service;
 
+import java.sql.SQLException;
 import java.util.Set;
 import in.casekartin.dao.CaseManagerDAO;
+import in.casekartin.exception.DBException;
 import in.casekartin.exception.NumberException;
 import in.casekartin.exception.ServiceException;
 import in.casekartin.exception.StringException;
@@ -38,7 +40,7 @@ public class CaseManagerService {
 		} catch (StringException | NumberException | ValidationException e) {
 			
 			throw new ServiceException(e.getMessage(), e);
-		}catch(Exception e){
+		}catch(SQLException |DBException e){
 			e.printStackTrace();
 		}
 		return isAdded;
@@ -61,7 +63,7 @@ public class CaseManagerService {
 				isDeleted = true;
 			}
 			
-		} catch (Exception e) {
+		} catch (SQLException |DBException e) {
 			e.printStackTrace();
 		}
 		return isDeleted;
@@ -78,7 +80,7 @@ public class CaseManagerService {
 		Set<CaseManager> caseTypes = null;
 		try {
 			caseTypes = CaseManagerDAO.listAllCases();
-		} catch (Exception e) {
+		} catch (SQLException |DBException e) {
 			e.printStackTrace();
 		}
 		return caseTypes;

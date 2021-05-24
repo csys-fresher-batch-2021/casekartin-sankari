@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
+import in.casekartin.exception.DBException;
 import in.casekartin.model.CaseManager;
 import in.casekartin.util.ConnectionUtil;
 
@@ -21,7 +22,7 @@ public class CaseManagerDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public static boolean addCase(String caseName, Float price) throws Exception {
+	public static boolean addCase(String caseName, Float price) throws SQLException,DBException {
 		Connection connection = null;
 		PreparedStatement pst = null;
 		try {
@@ -42,7 +43,7 @@ public class CaseManagerDAO {
 			}
 			return inserted;
 		} catch (Exception e) {
-			throw new Exception("Unable to add case");
+			throw new SQLException("Unable to add case");
 		} finally {
 			ConnectionUtil.close(connection, pst);
 		}
@@ -52,7 +53,7 @@ public class CaseManagerDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public static Set<CaseManager> listAllCases() throws Exception {
+	public static Set<CaseManager> listAllCases() throws DBException,SQLException {
 		Set<CaseManager> caseTypes = new HashSet<>();
 		Connection connection = null;
 		PreparedStatement pst = null;
@@ -73,7 +74,7 @@ public class CaseManagerDAO {
 				caseTypes.add(product);
 			}
 		} catch (Exception e) {
-			throw new Exception("Unable to display case");
+			throw new SQLException("Unable to display case");
 		}
 		finally {
 		ConnectionUtil.close(connection, pst, rs);
@@ -86,7 +87,7 @@ public class CaseManagerDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public static boolean deleteCase(String caseName) throws Exception {
+	public static boolean deleteCase(String caseName) throws DBException,SQLException {
 		Connection connection = null;
 		PreparedStatement pst = null;
 		try {
@@ -106,7 +107,7 @@ public class CaseManagerDAO {
 			}
 			return deleted;
 		} catch (Exception e) {
-			throw new Exception("Unable to delete case");
+			throw new SQLException("Unable to delete case");
 		}
 		finally {
 			ConnectionUtil.close(connection, pst);
