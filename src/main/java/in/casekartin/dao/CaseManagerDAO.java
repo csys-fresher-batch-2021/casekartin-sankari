@@ -1,87 +1,158 @@
 package in.casekartin.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
+import in.casekartin.exception.DBException;
 import in.casekartin.model.CaseManager;
-import in.casekartin.util.CaseManagerUtil;
-import in.casekartin.validator.CaseManagerValidator;
+import in.casekartin.util.ConnectionUtil;
 
 public class CaseManagerDAO {
-	
-	
-	private CaseManagerDAO() {
-		// default constructor
-	}
-	
-	/**
-	 * Create the hash set for storing case types through hash set
-	 */
-	private static final Set<CaseManager> caseTypes = new HashSet<>();
-
-	static {
-		// add the case types to the hash Set
-		CaseManager case1 = new CaseManager("POLYCARBONATE", 300.0f);
-		caseTypes.add(case1);
-		CaseManager case2 = new CaseManager("LEATHER", 500.0f);
-		caseTypes.add(case2);
-		CaseManager case3 = new CaseManager("SILICONE", 200.0f);
-		caseTypes.add(case3);
-		CaseManager case4 = new CaseManager("HARD", 499.0f);
-		caseTypes.add(case4);
-		CaseManager case5 = new CaseManager("FRIENDS NAME TAG GLASS", 600.0f);
-		caseTypes.add(case5);
-		CaseManager case6 = new CaseManager("CSK CUSTOM", 599.0f);
-		caseTypes.add(case6);
-		CaseManager case7 = new CaseManager("NEON SAND GLOW", 749.0f);
-		caseTypes.add(case7);
-	}
-
-	/**
-	 * Return the case Types
-	 * 
-	 * @return
-	 * @return
-	 */
-	public static Set<CaseManager> getCaseTypes() {
-		return caseTypes;
-
+	private CaseManagerDAO(){
+		//default constructor
 	}
 	/**
-	 * method for add the case name
-	 * 
+	 * add the case name and price to database
 	 * @param caseName
-	 * @param cost
+	 * @param price
 	 * @return
+	 * @throws SQLException 
+	 * @throws Exception
 	 */
-	public static boolean addCase(String caseName,String cost)
-	{
-		boolean isAdded=false;
-		Float price = Float.parseFloat(cost);
+	public static boolean addCase(String caseName, Float price) throws DBException {
+		Connection connection = null;
+		PreparedStatement pst = null;
+			// Get Connection
+			boolean inserted = false;
+			try {
+				connection = ConnectionUtil.getConnection();
+				// prepare data
+				String sql = "insert into caseTypes(casename,price) values (?,?)";
+				pst = connection.prepareStatement(sql);
+				pst.setString(1, caseName);
+				pst.setFloat(2, price);
+
+				// Execute Query
+				int rows = pst.executeUpdate();
+				if(rows==1)
+				{
+					inserted=true;
+				}
+			} catch (ClassNotFoundException |SQLException e) {
+				e.printStackTrace();
+				throw new DBException("Unable to add case");
+			} finally {
+				
+					ConnectionUtil.close(connection, pst);
+				
+			}
+			return inserted;
+	}
+	/**
+	 * Retrieve all data from database table 
+	 * @return
+	 * @throws SQLException 
+	 * @throws Exception
+	 */
+	public static Set<CaseManager> listAllCases() throws DBException {
+		Set<CaseManager> caseTypes = new HashSet<>();
+		Connection connection = null;
+		PreparedStatement pst = null;
+		ResultSet rs=null;
+		try {
+			connection = ConnectionUtil.getConnection();
+			// Retrieve data from table
+			String sql = "select * from caseTypes";
+			pst = connection.prepareStatement(sql);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				String caseName = rs.getString("casename");
+				Float price = rs.getFloat("price");
+				String status=rs.getString("status");
+
+				// Store the data in model
+				CaseManager product = new CaseManager(caseName, price,status);
+				// Store all products in list
+				caseTypes.add(product);
+			}
+		} catch (ClassNotFoundException |SQLException e) {
+			e.printStackTrace();
+			throw new DBException("Unable to display case",e);
+		}
+		finally {
 		
-		if (CaseManagerUtil.isValidCaseName(caseName) && CaseManagerUtil.isValidCost(price)
-				&& CaseManagerUtil.isCharAllowed(caseName) && CaseManagerValidator.isCaseNameNotExist(caseName)) {
-			CaseManager newCase = new CaseManager(caseName.toUpperCase(), price);
-			caseTypes.add(newCase);
-			isAdded=true;
+			ConnectionUtil.close(connection, pst, rs);
 		}
-		return isAdded;
+		return caseTypes;
 	}
 	/**
-	 * method for delete the case name
-	 * 
+	 * Delete specific data in database
 	 * @param caseName
-	 * @param cost
 	 * @return
+	 * @throws SQLException 
+	 * @throws Exception
 	 */
-	public static boolean deleteCase(String caseName) {
-		boolean isDeleted=false;
-		CaseManager searchCase=CaseManagerValidator.isCaseNameExist(caseName); 
-		if(searchCase!=null) {
-			caseTypes.remove(searchCase);
-			isDeleted = true;
+	public static boolean deleteCase(String caseName) throws DBException {
+		Connection connection = null;
+		PreparedStatement pst = null;
+		try {
+			// Get Connection
+			connection = ConnectionUtil.getConnection();
+			// prepare data
+			String sql = "update caseTypes set status='inactive' WHERE casename=?";
+			
+			// Execute Query
+			pst = connection.prepareStatement(sql);
+			pst.setString(1, caseName);
+			int rows = pst.executeUpdate();
+			boolean deleted = false;
+			if(rows==1)
+			{
+				deleted=true;
+			}
+			return deleted;
+		} catch (ClassNotFoundException |SQLException e) {
+			e.printStackTrace();
+			throw new DBException("Unable to delete case",e);
 		}
-		return isDeleted;
+		finally {
+			
+				ConnectionUtil.close(connection, pst);
+		}
+		
 	}
+	public static boolean updateCaseToActive(String caseName) throws DBException {
+		Connection connection = null;
+		PreparedStatement pst = null;
+			// Get Connection
+			boolean updated = false;
+			try {
+				connection = ConnectionUtil.getConnection();
+				// prepare data
+				String sql = "update caseTypes set status='active' WHERE casename=?";
+				pst = connection.prepareStatement(sql);
+				pst.setString(1, caseName);
+				
 
+				// Execute Query
+				int rows = pst.executeUpdate();
+				if(rows==1)
+				{
+					updated=true;
+				}
+			} catch (ClassNotFoundException |SQLException e) {
+				e.printStackTrace();
+				throw new DBException("Unable to add case");
+			} finally {
+				
+					ConnectionUtil.close(connection, pst);
+				
+			}
+			return updated;
+		
+	}
 }

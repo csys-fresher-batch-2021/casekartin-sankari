@@ -15,8 +15,10 @@
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active"><a class="nav-link"
 					href="index.jsp">Home <span class="sr-only">(current)</span></a></li>
+					
 				<li class="nav-item"><a class="nav-link" href="caseTypes.jsp">Cases</a>
 				</li>
+				
 			</ul>
 			
 

@@ -1,5 +1,5 @@
 <%@page import="java.util.Set"%>
-<%@page import="in.casekartin.dao.CaseManagerDAO"%>
+<%@page import="in.casekartin.service.CaseManagerService"%>
 <%@page import="in.casekartin.model.CaseManager"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,9 +22,9 @@
 			<tbody>
 				<!-- Scriptlets(java code for display the list of case types) -->
 				<%
-				Set<CaseManager> caseTypes = CaseManagerDAO.getCaseTypes();
-				int i = 1;
-				for (CaseManager cases : caseTypes) {
+				Set<CaseManager> ActiveCaseTypes = CaseManagerService.getActiveCaseTypes();
+								int i = 1;
+								for (CaseManager cases : ActiveCaseTypes) {
 				%>
 				<tr>
 					<td><%=i%></td>
