@@ -12,6 +12,7 @@ import in.casekartin.model.CaseManager;
 import in.casekartin.util.ConnectionUtil;
 
 public class CaseManagerDAO {
+	private static final String NULL_CONNECION = "Connecion is null";
 	private CaseManagerDAO(){
 		//default constructor
 	}
@@ -37,7 +38,6 @@ public class CaseManagerDAO {
 
 				// Execute Query
 				int rows = pst.executeUpdate();
-				inserted = false;
 				if(rows==1)
 				{
 					inserted=true;
@@ -49,7 +49,7 @@ public class CaseManagerDAO {
 				try {
 					ConnectionUtil.close(connection, pst);
 				} catch (SQLException e) {
-					throw new DBException("Connecion is null",e);
+					throw new DBException(NULL_CONNECION,e);
 				}
 			}
 			return inserted;
@@ -73,7 +73,6 @@ public class CaseManagerDAO {
 			while (rs.next()) {
 				String caseName = rs.getString("casename");
 				Float price = rs.getFloat("price");
-				System.out.println("casename"+caseName+"price"+price);
 
 				// Store the data in model
 				CaseManager product = new CaseManager(caseName, price);
@@ -87,7 +86,7 @@ public class CaseManagerDAO {
 		try {
 			ConnectionUtil.close(connection, pst, rs);
 		} catch (SQLException e) {
-			throw new DBException("Connecion is null",e);
+			throw new DBException(NULL_CONNECION,e);
 		}
 		}
 		return caseTypes;
@@ -124,7 +123,7 @@ public class CaseManagerDAO {
 			try {
 				ConnectionUtil.close(connection, pst);
 			} catch (SQLException e) {
-				throw new DBException("Connecion is null",e);
+				throw new DBException(NULL_CONNECION,e);
 			}
 		}
 		

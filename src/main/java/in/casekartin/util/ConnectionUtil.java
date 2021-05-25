@@ -6,9 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import in.casekartin.exception.DBException;
-
-
 public class ConnectionUtil {
 	private ConnectionUtil()
 	{
