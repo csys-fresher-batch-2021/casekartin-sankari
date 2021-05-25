@@ -22,9 +22,9 @@
 			<tbody>
 				<!-- Scriptlets(java code for display the list of case types) -->
 				<%
-				Set<CaseManager> caseTypes = CaseManagerService.getCaseTypes();
-						int i = 1;
-						for (CaseManager cases : caseTypes) {
+				Set<CaseManager> ActiveCaseTypes = CaseManagerService.getActiveCaseTypes();
+								int i = 1;
+								for (CaseManager cases : ActiveCaseTypes) {
 				%>
 				<tr>
 					<td><%=i%></td>

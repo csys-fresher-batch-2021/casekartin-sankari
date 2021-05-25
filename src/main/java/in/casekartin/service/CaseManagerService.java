@@ -1,5 +1,6 @@
 package in.casekartin.service;
 
+import java.util.HashSet;
 import java.util.Set;
 import in.casekartin.dao.CaseManagerDAO;
 import in.casekartin.exception.DBException;
@@ -32,8 +33,15 @@ public class CaseManagerService {
 			StringNumberUtil.stringUtil(caseName);
 			StringNumberUtil.positiveNumberUtil(price);
 			CaseManagerValidator.isCharAllowed(caseName);
-			CaseManagerValidator.isCaseNameNotExist(caseName);
-			CaseManagerDAO.addCase(caseName, price);
+			if(CaseManagerValidator.isCaseNameNotExist(caseName))
+			{
+				CaseManagerDAO.addCase(caseName, price);
+			}
+			else if(!CaseManagerValidator.isCaseNameExistActiveCaseTypes(caseName) && !CaseManagerValidator.isCaseNameNotExist(caseName))
+			{
+				CaseManagerDAO.updateCaseToActive(caseName);
+			}
+			
 			isAdded = true;
 			
 		} catch (StringException | NumberException | ValidationException e) {
@@ -69,16 +77,37 @@ public class CaseManagerService {
 
 	}
 	/**
-	 * Return the case Types
+	 * Return the active case Types
 	 * 
 	 * @return
 	 * @return
 	 * @throws Exception 
 	 */
-	public static Set<CaseManager> getCaseTypes()  {
-		Set<CaseManager> caseTypes = null;
+	public static Set<CaseManager> getActiveCaseTypes()  {
+		Set<CaseManager> caseTypes=null;
+		Set<CaseManager> activeCaseTypes = new HashSet<>();
 		try {
 			caseTypes = CaseManagerDAO.listAllCases();
+			for(CaseManager cases:caseTypes)
+			{
+				if(cases.getStatus().equalsIgnoreCase("active"))
+				{
+					CaseManager activeCases = new CaseManager(cases.getCaseType(),cases.getCost(),cases.getStatus());
+					activeCaseTypes.add(activeCases);
+				}
+			}
+		} catch (DBException e) {
+			e.printStackTrace();
+		}
+		return activeCaseTypes;
+	}
+	/**
+	 * return all case Types
+	 */
+	public static Set<CaseManager> getAllCaseTypes()  {
+		Set<CaseManager> caseTypes=null;
+		try {
+			caseTypes=CaseManagerDAO.listAllCases();
 		} catch (DBException e) {
 			e.printStackTrace();
 		}

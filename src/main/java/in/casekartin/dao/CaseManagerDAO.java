@@ -12,7 +12,6 @@ import in.casekartin.model.CaseManager;
 import in.casekartin.util.ConnectionUtil;
 
 public class CaseManagerDAO {
-	private static final String NULL_CONNECION = "Connecion is null";
 	private CaseManagerDAO(){
 		//default constructor
 	}
@@ -21,6 +20,7 @@ public class CaseManagerDAO {
 	 * @param caseName
 	 * @param price
 	 * @return
+	 * @throws SQLException 
 	 * @throws Exception
 	 */
 	public static boolean addCase(String caseName, Float price) throws DBException {
@@ -46,17 +46,16 @@ public class CaseManagerDAO {
 				e.printStackTrace();
 				throw new DBException("Unable to add case");
 			} finally {
-				try {
+				
 					ConnectionUtil.close(connection, pst);
-				} catch (SQLException e) {
-					throw new DBException(NULL_CONNECION,e);
-				}
+				
 			}
 			return inserted;
 	}
 	/**
 	 * Retrieve all data from database table 
 	 * @return
+	 * @throws SQLException 
 	 * @throws Exception
 	 */
 	public static Set<CaseManager> listAllCases() throws DBException {
@@ -67,27 +66,26 @@ public class CaseManagerDAO {
 		try {
 			connection = ConnectionUtil.getConnection();
 			// Retrieve data from table
-			String sql = "select casename,price from caseTypes where status='active'";
+			String sql = "select * from caseTypes";
 			pst = connection.prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				String caseName = rs.getString("casename");
 				Float price = rs.getFloat("price");
+				String status=rs.getString("status");
 
 				// Store the data in model
-				CaseManager product = new CaseManager(caseName, price);
+				CaseManager product = new CaseManager(caseName, price,status);
 				// Store all products in list
 				caseTypes.add(product);
 			}
 		} catch (ClassNotFoundException |SQLException e) {
+			e.printStackTrace();
 			throw new DBException("Unable to display case",e);
 		}
 		finally {
-		try {
+		
 			ConnectionUtil.close(connection, pst, rs);
-		} catch (SQLException e) {
-			throw new DBException(NULL_CONNECION,e);
-		}
 		}
 		return caseTypes;
 	}
@@ -95,6 +93,7 @@ public class CaseManagerDAO {
 	 * Delete specific data in database
 	 * @param caseName
 	 * @return
+	 * @throws SQLException 
 	 * @throws Exception
 	 */
 	public static boolean deleteCase(String caseName) throws DBException {
@@ -117,15 +116,43 @@ public class CaseManagerDAO {
 			}
 			return deleted;
 		} catch (ClassNotFoundException |SQLException e) {
+			e.printStackTrace();
 			throw new DBException("Unable to delete case",e);
 		}
 		finally {
-			try {
+			
 				ConnectionUtil.close(connection, pst);
-			} catch (SQLException e) {
-				throw new DBException(NULL_CONNECION,e);
-			}
 		}
+		
+	}
+	public static boolean updateCaseToActive(String caseName) throws DBException {
+		Connection connection = null;
+		PreparedStatement pst = null;
+			// Get Connection
+			boolean updated = false;
+			try {
+				connection = ConnectionUtil.getConnection();
+				// prepare data
+				String sql = "update caseTypes set status='active' WHERE casename=?";
+				pst = connection.prepareStatement(sql);
+				pst.setString(1, caseName);
+				
+
+				// Execute Query
+				int rows = pst.executeUpdate();
+				if(rows==1)
+				{
+					updated=true;
+				}
+			} catch (ClassNotFoundException |SQLException e) {
+				e.printStackTrace();
+				throw new DBException("Unable to add case");
+			} finally {
+				
+					ConnectionUtil.close(connection, pst);
+				
+			}
+			return updated;
 		
 	}
 }

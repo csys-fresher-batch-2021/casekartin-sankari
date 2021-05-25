@@ -18,7 +18,7 @@ public class ConnectionUtil {
 	private static final String DB_PASSWORD = "Gsskh2k*";
 	private static final String HOST = "localhost";
 	private static final int PORT = 5433;
-	private static final String DB_URL = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DATABASE_NAME;
+	private static final String DB_URL = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DATABASE_NAME;//jdbc:postgresql://localhost/case
 	
 	public static Connection getConnection() throws SQLException, ClassNotFoundException{
 		Connection connection=null;
@@ -32,31 +32,39 @@ public class ConnectionUtil {
 
 		return connection;
 	}
-	public static void close(Connection connection,PreparedStatement preparedStatement,ResultSet result) throws SQLException
+	public static void close(Connection connection,PreparedStatement preparedStatement,ResultSet result)
 	{
 
-			if(result!=null)
-			{
-				result.close();
-			}
-			if(preparedStatement!=null)
-			{
-				preparedStatement.close();
-			}
-			if(connection!=null)
-			{
-				connection.close();
+			try {
+				if(result!=null)
+				{
+					result.close();
+				}
+				if(preparedStatement!=null)
+				{
+					preparedStatement.close();
+				}
+				if(connection!=null)
+				{
+					connection.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 	}
-	public static void close(Connection connection,PreparedStatement preparedStatement) throws SQLException
+	public static void close(Connection connection,PreparedStatement preparedStatement)  
 	{
-			if(preparedStatement!=null)
-			{
-				preparedStatement.close();
-			}
-			if(connection!=null)
-			{
-				connection.close();
+			try {
+				if(preparedStatement!=null)
+				{
+					preparedStatement.close();
+				}
+				if(connection!=null)
+				{
+					connection.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 	}
 
