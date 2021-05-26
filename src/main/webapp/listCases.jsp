@@ -36,7 +36,11 @@ function getAllCases(){
 		let content = "";
 		let serial=1;
 		for(let caselist of cases){ //  <a class="btn btn-danger" href="link.html">Cancle</a>
-			content += "<tr><td>"+serial+"</td><td>"+caselist.caseType+"</td><td>Rs."+caselist.cost+"/-</td ><td><a class=\"btn btn-danger\"href=\"DeleteCaseTypeServlet?caseName="+caselist.caseType+"\">Delete</a></td></tr>";
+			content += "<tr><td>"+serial+
+			"</td><td>"+caselist.caseType+
+			"</td><td>Rs."+caselist.cost+
+			"/-</td ><td><a class=\"btn btn-danger\"href=\"DeleteCaseTypeServlet?caseName="+
+					caselist.caseType+"\">Delete</a></td></tr>";
 			serial++;
 		}
 		console.log(content);
