@@ -33,7 +33,7 @@ public class AddCaseTypeServlet extends HttpServlet {
 		 */
 		try {
 			CaseManagerService.addCaseType(caseName, cost);
-				response.sendRedirect("caseTypes.jsp");
+				response.sendRedirect("listCases.jsp");
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			String message = e.getMessage();
