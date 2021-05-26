@@ -1,9 +1,9 @@
-<%@page import="java.util.Set"%>
-<%@page import="in.casekartin.service.CaseManagerService"%>
-<%@page import="in.casekartin.model.CaseManager"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <title>Display Case Name</title>
 </head>
 <body>
@@ -19,26 +19,33 @@
 					<th id="cost">Cost</th>
 				</tr>
 			</thead>
-			<tbody>
-				<!-- Scriptlets(java code for display the list of case types) -->
-				<%
-				Set<CaseManager> ActiveCaseTypes = CaseManagerService.getActiveCaseTypes();
-								int i = 1;
-								for (CaseManager cases : ActiveCaseTypes) {
-				%>
-				<tr>
-					<td><%=i%></td>
-					<td><%=cases.getCaseType()%></td>
-					<td>Rs.<%=cases.getCost()%>/-</td>
-					 <td><a href="DeleteCaseTypeServlet?caseName=<%=cases.getCaseType()%>"class="btn btn-danger">Delete</a></td>
-				</tr>
-				<%
-				i++;
-				}
-				%>
+			<tbody id="case-table">
 			</tbody>
 		</table>
+
 		<a href="addCaseTypes.jsp">Add Case Type</a>
 	</main>
+	<script type="text/javascript">
+
+function getAllCases(){
+	
+	console.log("Fetching all Cases ");
+	let url = "ListCasesServlet";
+	fetch(url).then(res=> res.json()).then(res=>{
+		let cases = res;
+		console.log("Got response from servlet");
+		console.log(cases);
+		let content = "";
+		let serial=1;
+		for(let caselist of cases){ //  <a class="btn btn-danger" href="link.html">Cancle</a>
+			content += "<tr><td>"+serial+"</td><td>"+caselist.caseType+"</td><td>Rs."+caselist.cost+"/-</td ><td><a class=\"btn btn-danger\"href=\"DeleteCaseTypeServlet?caseName="+caselist.caseType+"\">Delete</a></td></tr>";
+			serial++;
+		}
+		console.log(content);
+		document.querySelector("#case-table").innerHTML= content;
+	})	
+}
+getAllCases();
+</script>
 </body>
 </html>

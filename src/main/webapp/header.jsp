@@ -16,7 +16,7 @@
 				<li class="nav-item active"><a class="nav-link"
 					href="index.jsp">Home <span class="sr-only">(current)</span></a></li>
 					
-				<li class="nav-item"><a class="nav-link" href="caseTypes.jsp">Cases</a>
+				<li class="nav-item"><a class="nav-link" href="listCases.jsp">Cases</a>
 				</li>
 				
 			</ul>
