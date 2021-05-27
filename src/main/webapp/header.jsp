@@ -2,6 +2,9 @@
 <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
 
+<%
+String userName = (String) session.getAttribute("LOGGED_IN_USER");
+%>
 <header>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 		<a class="navbar-brand" href="index.jsp">CaseKartinApp</a>
@@ -15,13 +18,28 @@
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active"><a class="nav-link"
 					href="index.jsp">Home <span class="sr-only">(current)</span></a></li>
-					
+
+				<%  if (userName=="admin") { %>
+
 				<li class="nav-item"><a class="nav-link" href="listCases.jsp">Cases</a>
 				</li>
-				
+				<% } else{ %>
+				<% } %>
 			</ul>
-			
+			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+				<% if (userName == null) { %>
 
+				<li class="nav-item active"><a class="nav-link"
+					href="login.jsp">Login</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Register</a>
+				</li>
+				<% } else{ %>
+				<li class="nav-item"><a class="nav-link" href="#">Welcome <%=userName%></a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="LogoutServlet">Logout</a>
+				</li>
+				<% } %>
+			</ul>
 		</div>
 	</nav>
 </header>

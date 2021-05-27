@@ -21,7 +21,7 @@ public class StringNumberUtil {
 			isValid = true;
 			return isValid;
 		} else {
-			throw new StringException("Invalid Case Name");
+			throw new StringException("Invalid String");
 		}
 
 	}
