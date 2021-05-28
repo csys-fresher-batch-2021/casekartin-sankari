@@ -23,7 +23,6 @@ String userName = (String) session.getAttribute("LOGGED_IN_USER");
 
 				<li class="nav-item"><a class="nav-link" href="listCases.jsp">Cases</a>
 				</li>
-				<% } else{ %>
 				<% } %>
 			</ul>
 			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
