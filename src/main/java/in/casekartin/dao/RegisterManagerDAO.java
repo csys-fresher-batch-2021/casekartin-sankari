@@ -17,6 +17,8 @@ import in.casekartin.util.ConnectionUtil;
 
 public class RegisterManagerDAO {
 
+	private static final String USER_NAME = "username";
+
 	/**
 	 * Add the user details to table
 	 * 
@@ -82,7 +84,7 @@ public class RegisterManagerDAO {
 			rs = pst.executeQuery();
 			rs.next();
 			String name = rs.getString("name");
-			String userNameRs = rs.getString("username");
+			String userNameRs = rs.getString(USER_NAME);
 			String mobileNum = String.valueOf(rs.getLong("mobilenumber"));
 			String email = rs.getString("email");
 			String address = rs.getString("address");
@@ -122,7 +124,7 @@ public class RegisterManagerDAO {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				String name = rs.getString("name");
-				String userName = rs.getString("username");
+				String userName = rs.getString(USER_NAME);
 				String mobileNum = String.valueOf(rs.getLong("mobilenumber"));
 				String email = rs.getString("email");
 				String address = rs.getString("address");
@@ -162,7 +164,7 @@ public class RegisterManagerDAO {
 			pst.setString(1, userName);
 			pst.setString(2, password);
 			rs = pst.executeQuery();
-			String userNameRs = rs.getString("username");
+			String userNameRs = rs.getString(USER_NAME);
 			if (userName.equals(userNameRs)) {
 				isValidUser = true;
 				return isValidUser;
