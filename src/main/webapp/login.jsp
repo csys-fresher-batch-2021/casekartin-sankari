@@ -32,7 +32,7 @@ function login(){
 	if(message=="true")
 	{
 	alert("Login Success");
-	window.location.href="listCases.jsp";
+	window.location.href="index.jsp";
 	}
 else
 	{

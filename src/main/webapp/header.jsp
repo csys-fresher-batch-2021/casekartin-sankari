@@ -19,7 +19,7 @@ String userName = (String) session.getAttribute("LOGGED_IN_USER");
 				<li class="nav-item active"><a class="nav-link"
 					href="index.jsp">Home <span class="sr-only">(current)</span></a></li>
 
-				<%  if (userName=="admin") { %>
+				<%  if (userName != null && userName.equals("admin")) { %>
 
 				<li class="nav-item"><a class="nav-link" href="listCases.jsp">Cases</a>
 				</li>
@@ -30,7 +30,7 @@ String userName = (String) session.getAttribute("LOGGED_IN_USER");
 
 				<li class="nav-item active"><a class="nav-link"
 					href="login.jsp">Login</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Register</a>
+				<li class="nav-item active"><a class="nav-link" href="registration.jsp">Register</a>
 				</li>
 				<% } else{ %>
 				<li class="nav-item"><a class="nav-link" href="#">Welcome <%=userName%></a>
@@ -38,6 +38,14 @@ String userName = (String) session.getAttribute("LOGGED_IN_USER");
 				<li class="nav-item"><a class="nav-link" href="LogoutServlet">Logout</a>
 				</li>
 				<% } %>
+				<% if(userName!=null && userName.equalsIgnoreCase("admin")){ %>
+				<li class="nav-item"><a class="nav-link" href="ListAllUserServlet">AllUserList</a>
+				</li>
+				<% } else if(userName!=null && !userName.equalsIgnoreCase("admin")){%>
+				<li class="nav-item"><a class="nav-link" href="userDetails.jsp">Your Account</a>
+				</li>
+				<% } %>
+				
 			</ul>
 		</div>
 	</nav>

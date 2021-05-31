@@ -4,9 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import in.casekartin.dao.CaseManagerDAO;
 import in.casekartin.exception.DBException;
-import in.casekartin.exception.NumberException;
 import in.casekartin.exception.ServiceException;
-import in.casekartin.exception.StringException;
 import in.casekartin.exception.ValidationException;
 import in.casekartin.model.CaseManager;
 import in.casekartin.util.StringNumberUtil;
@@ -32,7 +30,7 @@ public class CaseManagerService {
 		try {
 			StringNumberUtil.stringUtil(caseName);
 			StringNumberUtil.positiveNumberUtil(price);
-			CaseManagerValidator.isCharAllowed(caseName);
+			StringNumberUtil.isNumberAlphaCharAllowed(caseName);
 			if(CaseManagerValidator.isCaseNameNotExist(caseName))
 			{
 				CaseManagerDAO.addCase(caseName, price);
@@ -44,7 +42,7 @@ public class CaseManagerService {
 			
 			isAdded = true;
 			
-		} catch (StringException | NumberException | ValidationException e) {
+		} catch ( ValidationException e) {
 			
 			throw new ServiceException(e.getMessage(), e);
 		}catch(DBException e){
