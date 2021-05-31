@@ -1,7 +1,5 @@
 package in.casekartin.service;
 
-import java.util.Map;
-
 import in.casekartin.dao.RegisterManagerDAO;
 import in.casekartin.exception.DBException;
 import in.casekartin.exception.ServiceException;
@@ -23,9 +21,14 @@ public class LoginService {
 	public static boolean isloginSuccess(String userName, String password) throws ServiceException {
 		boolean isLoginSuccess=false;
 		try {
-			Map <String,String> loginList=regDAO.getUserNamePassword();
-			LoginValidator.isLoginVerified(loginList,userName,password);
-			isLoginSuccess=true;
+			if(regDAO.isLoginVerified(userName,password)) {
+				isLoginSuccess=true;
+			}	
+			else if(LoginValidator.isLoginVerified(userName,password)) {
+				isLoginSuccess=true;
+			}else {
+				throw new ServiceException("Invalid Login Credentials");
+			}
 			return isLoginSuccess;
 		} catch (ValidationException e) {
 			throw new ServiceException(e.getMessage(),e);

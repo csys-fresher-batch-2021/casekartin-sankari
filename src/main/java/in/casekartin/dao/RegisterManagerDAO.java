@@ -9,9 +9,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import in.casekartin.exception.DBException;
 import in.casekartin.model.RegisterManager;
@@ -105,32 +103,32 @@ public class RegisterManagerDAO {
 		}
 		return listUserDetails;
 	}
-	/**
-	 * Retrieve user name and password from table data
-	 * @return
-	 * @throws DBException
-	 */
-	public Map<String,String> getUserNamePassword() throws DBException{
-		Map<String,String> loginList = new HashMap<>();
+	
+	public boolean isLoginVerified(String userName, String password) throws DBException {
 		Connection connection=null;
 		PreparedStatement pst=null;
 		ResultSet rs=null;
+		boolean isValidUser=false;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String query="select username,password from userdetails";
+			String query="select username from userdetails where username='?' and password='?";
 			pst=connection.prepareStatement(query);
+			pst.setString(1,userName);
+			pst.setString(2,password);
 			rs = pst.executeQuery();
-			while(rs.next()) {
-				String userName=rs.getString("username");
-				String password=rs.getString("password");
-				loginList.put(userName, password);
+			String userNameRs=rs.getString("username");
+			if(userName.equals(userNameRs))
+			{
+				isValidUser=true;
+				return isValidUser;
 			}
 		}catch(ClassNotFoundException |SQLException e){
 			throw new DBException("Unable to retrive details");
 		}finally {
 			ConnectionUtil.close(connection,pst,rs);
 		}
-		return loginList;
+		return isValidUser;
+		
 	}
 	
 
