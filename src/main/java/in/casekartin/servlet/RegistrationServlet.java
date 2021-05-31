@@ -37,8 +37,13 @@ public class RegistrationServlet extends HttpServlet {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		//create array list to carry registration info 
-		RegisterManager regDetails=new RegisterManager(0,name,userName,password,mobileNum,null,null,email,address);
-		
+		RegisterManager regDetails=new RegisterManager();
+		regDetails.setName(name);
+		regDetails.setUserName(userName);
+		regDetails.setPassword(password);
+		regDetails.setMobileNum(mobileNum);
+		regDetails.setEmail(email);
+		regDetails.setAddress(address);
 		String message=null;
 		Gson gson = new Gson();
 		try {

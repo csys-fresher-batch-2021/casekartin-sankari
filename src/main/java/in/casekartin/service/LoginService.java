@@ -21,10 +21,7 @@ public class LoginService {
 	public static boolean isloginSuccess(String userName, String password) throws ServiceException {
 		boolean isLoginSuccess=false;
 		try {
-			if(regDAO.isLoginVerified(userName,password)) {
-				isLoginSuccess=true;
-			}	
-			else if(LoginValidator.isLoginVerified(userName,password)) {
+			if(regDAO.isLoginVerified(userName,password) || LoginValidator.isLoginVerified(userName,password)) {
 				isLoginSuccess=true;
 			}else {
 				throw new ServiceException("Invalid Login Credentials");

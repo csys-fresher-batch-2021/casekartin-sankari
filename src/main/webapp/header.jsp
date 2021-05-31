@@ -39,7 +39,7 @@ String userName = (String) session.getAttribute("LOGGED_IN_USER");
 				</li>
 				<% } %>
 				<% if(userName!=null && userName.equalsIgnoreCase("admin")){ %>
-				<li class="nav-item"><a class="nav-link" href="ListAllUserServlet">AllUserList</a>
+				<li class="nav-item"><a class="nav-link" href="listAllUser.jsp">AllUserList</a>
 				</li>
 				<% } else if(userName!=null && !userName.equalsIgnoreCase("admin")){%>
 				<li class="nav-item"><a class="nav-link" href="userDetails.jsp">Your Account</a>

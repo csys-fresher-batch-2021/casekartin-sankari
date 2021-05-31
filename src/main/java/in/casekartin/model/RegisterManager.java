@@ -66,19 +66,7 @@ public class RegisterManager {
 				+ ", password=" + password + ", id=" + id + "]";
 	}
 
-	public RegisterManager(int id, String name, String userName, String password, String mobileNum,
-			LocalDate createdDate, LocalDateTime modifiedDate, String email, String address) {
-		super();
-		setId(id);
-		setName(name);
-		setUserName(userName);
-		setPassword(password);
-		setMobileNum(mobileNum);
-		setCreatedDate(createdDate);
-		setModifiedDate(modifiedDate);
-		setEmail(email);
-		setAddress(address);
-	}
+	
 	private int id;
 	private String name;	
 	private String userName;

@@ -45,7 +45,7 @@ public class RegisterManagerService {
 	 * list all user details 
 	 * @return
 	 */
-	public static List<RegisterManager> listAllDetails() {
+	public static List<RegisterManager> listAllDetails() throws ServiceException{
 		List<RegisterManager> userDetails=null;
 		try {
 			userDetails=regDAO.getAllDetails();
@@ -62,22 +62,13 @@ public class RegisterManagerService {
 	 * @throws ServiceException
 	 */
 	public static RegisterManager listByUserName(String userName) throws ServiceException{
-		List<RegisterManager> regDetails=null;
-		RegisterManager user=null;
+		RegisterManager regDetails=null;
 		try {
-			regDetails=regDAO.getAllDetails();
-			for(RegisterManager userDetails: regDetails) {
-				if(userDetails.getUserName().equals(userName)) {
-					user=new RegisterManager(userDetails.getId(),userDetails.getName(),userDetails.getUserName(),userDetails.getPassword(),userDetails.getMobileNum(),userDetails.getCreatedDate(),userDetails.getModifiedDate(),userDetails.getEmail(),userDetails.getAddress());
-				}
-				else {
-					throw new ServiceException("Unable to display details");
-				}
-			}
+			regDetails=regDAO.getUserDetailsByUserName(userName);
 		}catch(DBException e){
 			e.printStackTrace();
 		}
-		return user;				
+		return regDetails;				
 	}
 	
 }
