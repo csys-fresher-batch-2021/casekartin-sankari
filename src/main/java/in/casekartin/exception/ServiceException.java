@@ -10,4 +10,8 @@ public class ServiceException extends Exception {
 		super(message,e);
 	}
 
+	public ServiceException(String message, DBException e) {
+		super(message,e);
+	}
+
 }

@@ -29,7 +29,7 @@ function login(){
 	let url = "LoginServlet"+queryParameter;
 	fetch(url).then(res=> res.json()).then(res=> {
 	let message=res;
-	if(message=="true")
+	if(message!=null && message.equals("true"))
 	{
 	alert("Login Success");
 	window.location.href="index.jsp";
