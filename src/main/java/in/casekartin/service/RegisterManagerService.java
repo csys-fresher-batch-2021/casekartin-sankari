@@ -68,9 +68,6 @@ public class RegisterManagerService {
 			regDetails=regDAO.getAllDetails();
 			for(RegisterManager userDetails: regDetails) {
 				if(userDetails.getUserName().equals(userName)) {
-					System.out.println("username"+userDetails.getUserName());
-					System.out.println("id"+userDetails.getId());
-					System.out.println("password"+userDetails.getPassword());
 					user=new RegisterManager(userDetails.getId(),userDetails.getName(),userDetails.getUserName(),userDetails.getPassword(),userDetails.getMobileNum(),userDetails.getCreatedDate(),userDetails.getModifiedDate(),userDetails.getEmail(),userDetails.getAddress());
 				}
 			}

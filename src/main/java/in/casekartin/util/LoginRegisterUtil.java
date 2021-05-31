@@ -1,8 +1,6 @@
 package in.casekartin.util;
 
 import java.util.regex.Pattern;
-
-import in.casekartin.exception.StringException;
 import in.casekartin.exception.ValidationException;
 /**
  * Check user name has correct characters
