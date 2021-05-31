@@ -70,6 +70,9 @@ public class RegisterManagerService {
 				if(userDetails.getUserName().equals(userName)) {
 					user=new RegisterManager(userDetails.getId(),userDetails.getName(),userDetails.getUserName(),userDetails.getPassword(),userDetails.getMobileNum(),userDetails.getCreatedDate(),userDetails.getModifiedDate(),userDetails.getEmail(),userDetails.getAddress());
 				}
+				else {
+					throw new ServiceException("Unable to display details");
+				}
 			}
 		}catch(DBException e){
 			e.printStackTrace();
