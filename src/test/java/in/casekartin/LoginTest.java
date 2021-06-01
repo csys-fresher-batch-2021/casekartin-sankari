@@ -14,7 +14,7 @@ public class LoginTest {
 	@Test
 	public void testWithCorrectUserNameAndCorrectPassword() {
 		try {
-			boolean isValid=LoginValidator.isLoginVerified("admin", "pass123");
+			boolean isValid=LoginValidator.isLoginVerified("admin", "pass123*");
 			assertTrue(isValid);
 		} catch (ValidationException e) {
 			fail();

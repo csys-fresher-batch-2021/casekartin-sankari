@@ -1,33 +1,44 @@
 package in.casekartin.service;
 
+import in.casekartin.dao.RegisterManagerDAO;
+import in.casekartin.exception.DBException;
 import in.casekartin.exception.ServiceException;
-import in.casekartin.exception.StringException;
 import in.casekartin.exception.ValidationException;
-import in.casekartin.util.LoginRegisterUtil;
-import in.casekartin.util.StringNumberUtil;
 import in.casekartin.validator.LoginValidator;
 
 public class LoginService {
 	private LoginService(){
 		//default constructor
 	}
+	private static RegisterManagerDAO regDAO=new RegisterManagerDAO();
 	/**
-	 * 
+	 * check logged user name and password is valid
 	 * @param userName
 	 * @param password
 	 * @return
 	 * @throws ServiceException 
 	 */
-	public static boolean isloginSuccess(String userName, String password) throws ServiceException {
+	public static boolean isloginSuccess(String userName, String password,String role) throws ServiceException {
+		boolean isLoginSuccess=false;
 		try {
-			StringNumberUtil.stringUtil(userName);
-			LoginRegisterUtil.isUserNameCharAllowed(userName);
-			LoginRegisterUtil.isPasswordCharAllowed(password);
-			LoginValidator.isLoginVerified(userName,password);
-		} catch (StringException | ValidationException e) {
+			if(role.equalsIgnoreCase("user")) {
+				regDAO.isLoginVerified(userName,password);
+				isLoginSuccess=true;
+			}else if(role.equalsIgnoreCase("admin")) {
+				LoginValidator.isLoginVerified(userName,password);
+				isLoginSuccess=true;
+			}
+			else {
+				throw new ServiceException("Invalid Login Credentials");
+			}
+			return isLoginSuccess;
+		} catch (ValidationException e) {
+			throw new ServiceException(e.getMessage(),e);
+		}catch (DBException e) {
+			e.printStackTrace();
 			throw new ServiceException(e.getMessage(),e);
 		}
-		return false;
+		
 	}
 
 }
