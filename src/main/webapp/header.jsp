@@ -3,7 +3,8 @@
 <link rel="stylesheet" href="assets/css/style.css">
 
 <%
-String userName = (String) session.getAttribute("LOGGED_IN_USER");
+String role= (String) session.getAttribute("ROLE");
+String userName= (String) session.getAttribute("LOGGED_IN_USER");
 %>
 <header>
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -19,14 +20,14 @@ String userName = (String) session.getAttribute("LOGGED_IN_USER");
 				<li class="nav-item active"><a class="nav-link"
 					href="index.jsp">Home <span class="sr-only">(current)</span></a></li>
 
-				<%  if (userName != null && userName.equals("admin")) { %>
+				<%  if (role != null && role.equals("admin")) { %>
 
 				<li class="nav-item"><a class="nav-link" href="listCases.jsp">Cases</a>
 				</li>
 				<% } %>
 			</ul>
 			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-				<% if (userName == null) { %>
+				<% if (role == null && userName==null) { %>
 
 				<li class="nav-item active"><a class="nav-link"
 					href="login.jsp">Login</a></li>
@@ -38,10 +39,10 @@ String userName = (String) session.getAttribute("LOGGED_IN_USER");
 				<li class="nav-item"><a class="nav-link" href="LogoutServlet">Logout</a>
 				</li>
 				<% } %>
-				<% if(userName!=null && userName.equalsIgnoreCase("admin")){ %>
+				<% if(role!=null && role.equalsIgnoreCase("admin")){ %>
 				<li class="nav-item"><a class="nav-link" href="listAllUser.jsp">AllUserList</a>
 				</li>
-				<% } else if(userName!=null && !userName.equalsIgnoreCase("admin")){%>
+				<% } else if(role!=null && !role.equalsIgnoreCase("admin")){%>
 				<li class="nav-item"><a class="nav-link" href="userDetails.jsp">Your Account</a>
 				</li>
 				<% } %>

@@ -27,17 +27,19 @@ public class LoginServlet extends HttpServlet {
 	 *      response)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// get form values
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
+		String role = request.getParameter("role");
 		HttpSession session = request.getSession();
 		String message = null;
 		Gson gson = new Gson();
 		try {
-			LoginService.isloginSuccess(userName, password);
+			LoginService.isloginSuccess(userName, password,role);
 			session.setAttribute("LOGGED_IN_USER", userName);
+			session.setAttribute("ROLE", role);
 			message = "true";
 
 		} catch (ServiceException e) {

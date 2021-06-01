@@ -164,13 +164,14 @@ public class RegisterManagerDAO {
 			pst.setString(1, userName);
 			pst.setString(2, password);
 			rs = pst.executeQuery();
+			rs.next();
 			String userNameRs = rs.getString(USER_NAME);
 			if (userName.equals(userNameRs)) {
 				isValidUser = true;
 				return isValidUser;
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DBException("User Name is Not Available");
+			throw new DBException("Invalid Credentials");
 		} finally {
 			ConnectionUtil.close(connection, pst, rs);
 		}

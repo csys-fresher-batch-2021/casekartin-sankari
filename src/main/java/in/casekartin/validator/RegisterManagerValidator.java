@@ -26,7 +26,7 @@ public class RegisterManagerValidator {
 			
 			try {
 				if (((name.charAt(i) >= 'A' && name.charAt(i) <= 'Z') 
-						|| (name.charAt(i) >= 'a' && name.charAt(i) <= 'z') || name.charAt(i) == ' ')&&
+						|| (name.charAt(i) >= 'a' && name.charAt(i) <= 'z') ||( name.charAt(i) == '.') || (name.charAt(i) == ' '))&&
 						(name.length() >= 2) && StringNumberUtil.stringUtil(name)) 
 				{
 					isValid = true;

@@ -10,12 +10,16 @@
 		<h3>CaseKartin</h3>
 		<form onsubmit="login()">
 			<label for="userName">user name</label> <input type="text" id="userName"
-				name="userName" placeholder="User Name" pattern="[a-zA-Z0-9]{5,10}" required autofocus />
+				name="userName" placeholder="User Name" required autofocus />
 			<br />
-			<br /> <label for="password"></label>password<input type="password" id="password"
-				name="password" placeholder="Password" pattern="[a-zA-Z0-9*&$#@!]{5,10}"
+			<br /> 
+			<label for="password">Password</label>
+			<input type="password" id="password" name="password" placeholder="Password" 
 				required autofocus /> <br />
 			<br />
+			<input type="radio" name="role" id="role" value="admin"><label for="admin">Admin</label>
+			<input type="radio" name="role" id="role" value="user"><label for="user">User</label>
+			<br /><br/>
 			<button class="btn btn-info"type="submit">Login</button>
 			<button type="reset" class="btn btn-info">Reset</button>		
 		</form>
@@ -25,22 +29,35 @@ function login(){
 	event.preventDefault();
 	let userName=document.querySelector("#userName").value;
 	let password=document.querySelector("#password").value;
-	const queryParameter = "?userName=" + userName +"&password="+password;
-	let url = "LoginServlet"+queryParameter;
-	fetch(url).then(res=> res.json()).then(res=> {
-	let message=res;
-	if(message!=null && message.equals("true"))
-	{
-	alert("Login Success");
-	window.location.href="index.jsp";
-	}
-else
-	{
-	alert(message);
-	window.location.href="login.jsp";
-	}
+	let roles=document.querySelectorAll("#role");
+	let selectedRole ;
+	roles.forEach(obj=> {
+		if(obj.checked){
+			selectedRole = obj.value;
+		
+		}
+	});
+	console.log(selectedRole);
+		
 	
-	}
+	const queryParameter = "?userName=" + userName +"&password="+password +"&role="+selectedRole;
+	let url = "LoginServlet"+queryParameter;
+	const data = {}; //JSON Object => input
+	axios.post(url,data).then(res=> {
+		
+		let data = res.data;
+		let message=data;
+			if(message=="true")
+			{
+				alert("Login Success");
+				window.location.href="index.jsp";
+			}
+			else
+			{
+				alert(message);
+			}
+		
+		}
 	);
 }
 </script>

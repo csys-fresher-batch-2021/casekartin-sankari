@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <title>Registration</title>
 </head>
 <body>
@@ -10,7 +11,7 @@
 		<h3>Registration</h3>
 		<form onsubmit="register()">
 			<label for="name">Name</label> <input type="text" name="name"
-				id="name" placeholder="Enter Name" pattern="[a-zA-Z\s]{1,50}" required
+				id="name" placeholder="Enter Name" pattern="[a-zA-Z.\s]{1,50}" required
 				autofocus /> <br /> <br /> <label for="email">E-mail id</label> <input
 				type="text" name="email" id="email" placeholder="Enter mail Id"
 				pattern="[a-z0-9@.]{1,50}" required autofocus /> <br /> <br /> <label
@@ -38,8 +39,9 @@ function register(){
 	let password=document.querySelector("#password").value;
 	const queryParameter = "?name=" + name + "&email=" + email +"&mobileNum=" + mobileNum +"&address=" + address +"&userName=" + userName +"&password="+password;
 	let url = "RegistrationServlet"+queryParameter;	
-	fetch(url).then(res=> res.json()).then(res=> {
-		let message=res;
+	const data={};
+	axios.post(url,data).then(res=> {
+		let message=res.data;
 		if(message=="true")
 		{
 		alert("Registration Success");

@@ -18,12 +18,14 @@ public class LoginService {
 	 * @return
 	 * @throws ServiceException 
 	 */
-	public static boolean isloginSuccess(String userName, String password) throws ServiceException {
+	public static boolean isloginSuccess(String userName, String password,String role) throws ServiceException {
 		boolean isLoginSuccess=false;
 		try {
-			if(regDAO.isLoginVerified(userName,password)) {
+			if(role.equalsIgnoreCase("user")) {
+				regDAO.isLoginVerified(userName,password);
 				isLoginSuccess=true;
-			}else if(LoginValidator.isLoginVerified(userName,password)) {
+			}else if(role.equalsIgnoreCase("admin")) {
+				LoginValidator.isLoginVerified(userName,password);
 				isLoginSuccess=true;
 			}
 			else {
