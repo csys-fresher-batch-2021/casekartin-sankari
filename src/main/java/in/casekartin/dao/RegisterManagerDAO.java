@@ -16,7 +16,9 @@ import in.casekartin.model.RegisterManager;
 import in.casekartin.util.ConnectionUtil;
 
 public class RegisterManagerDAO {
-
+	Connection connection = null;
+	PreparedStatement pst = null;
+	ResultSet rs = null;
 	private static final String USER_NAME = "username";
 
 	/**
@@ -27,8 +29,6 @@ public class RegisterManagerDAO {
 	 * @throws DBException
 	 */
 	public boolean addRegDetails(RegisterManager regDetails) throws DBException {
-		Connection connection = null;
-		PreparedStatement pst = null;
 		regDetails.setCreatedDate(LocalDate.now());
 		regDetails.setModifiedDate(LocalDateTime.now());
 		// Get Connection
@@ -71,9 +71,6 @@ public class RegisterManagerDAO {
 	 * @throws Exception
 	 */
 	public RegisterManager getUserDetailsByUserName(String userName) throws DBException {
-		Connection connection = null;
-		PreparedStatement pst = null;
-		ResultSet rs = null;
 		RegisterManager userDetails = new RegisterManager();
 		try {
 			connection = ConnectionUtil.getConnection();
@@ -113,9 +110,6 @@ public class RegisterManagerDAO {
 	 */
 	public List<RegisterManager> getAllDetails() throws DBException {
 		List<RegisterManager> listUserDetails = new ArrayList<>();
-		Connection connection = null;
-		PreparedStatement pst = null;
-		ResultSet rs = null;
 		try {
 			connection = ConnectionUtil.getConnection();
 			// Retrieve data from table
@@ -153,9 +147,6 @@ public class RegisterManagerDAO {
 	}
 
 	public boolean isLoginVerified(String userName, String password) throws DBException {
-		Connection connection = null;
-		PreparedStatement pst = null;
-		ResultSet rs = null;
 		boolean isValidUser = false;
 		try {
 			connection = ConnectionUtil.getConnection();

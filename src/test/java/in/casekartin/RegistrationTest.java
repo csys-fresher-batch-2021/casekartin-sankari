@@ -11,7 +11,7 @@ import in.casekartin.validator.RegisterManagerValidator;
 public class RegistrationTest {
 
 	@Test
-	public void testIsNameCharAllowed() {
+	public void testWithNullName() {
 		try {
 			RegisterManagerValidator.isAlphaCharAllowed("    ");
 			fail();
@@ -20,18 +20,26 @@ public class RegistrationTest {
 		}
 	}
 	@Test
-	public void testIsUserNameValid()
+	public void testWithCorrectNamingCharacter() {
+		try {
+			boolean isValid=RegisterManagerValidator.isAlphaCharAllowed("selva Sankari.G");
+			assertTrue(isValid);
+		} catch (ValidationException e) {
+			fail();
+		}
+	}
+	@Test
+	public void testWithValidUserName()
 	{
 		try {
-			boolean isValid=false;
-			isValid=LoginRegisterUtil.isUserNameCharAllowed("selva2k");
+			boolean isValid=LoginRegisterUtil.isUserNameCharAllowed("selva2k");
 			assertTrue(isValid);
 		} catch ( ValidationException e) {
 			fail();
 		}
 	}
 	@Test
-	public void testIsUserNameNotValid()
+	public void testWithInValidUserName()
 	{
 		try {
 			LoginRegisterUtil.isUserNameCharAllowed("      ");
@@ -41,7 +49,7 @@ public class RegistrationTest {
 		}
 	}
 	@Test
-	public void testIsMobileNumValid()
+	public void testWithInCorrectMobileNumber()
 	{
 		try {
 			
@@ -52,25 +60,56 @@ public class RegistrationTest {
 		}
 	}
 	@Test
-	public void testIsEmailValid()
+	public void testWithCorrectMobileNumber()
 	{
 		try {
-			boolean isValid;
-			isValid=RegisterManagerValidator.isEmailValid("abc123@gmail.com");
+			
+			 boolean isValid=RegisterManagerValidator.isMobileNumValid("9003349584");
+			assertTrue(isValid);
+		} catch ( ValidationException e) {
+			fail();
+		}
+	}
+	@Test
+	public void testWithValidEmail()
+	{
+		try {
+			boolean isValid=RegisterManagerValidator.isEmailValid("abc123@gmail.com");
 			assertTrue(isValid);
 		} catch (ValidationException e) {
 			fail();
 		}
 	}
 	@Test
-	public void testIsAddressValid()
+	public void testWithInValidEmail()
+	{
+		try {
+			RegisterManagerValidator.isEmailValid("abc123gmail.com");
+			fail();
+		} catch (ValidationException e) {
+			assertEquals("Invalid Email Id",e.getMessage());
+		}
+	}
+	@Test
+	public void testWithInValidAddress()
 	{
 		try {
 			
-			assertTrue(RegisterManagerValidator.isAddressValid("4/2 * perumal kovil west street,Thachanallur,Tirunelveli-627 358"));
+			RegisterManagerValidator.isAddressValid("4/2 * perumal kovil west street,Thachanallur,Tirunelveli-627 358");
 			fail();
 		} catch (ValidationException e) {
 			assertEquals("Invalid Address",e.getMessage());
+		}
+	}
+	@Test
+	public void testWithValidAddress()
+	{
+		try {
+			
+			boolean isValid=RegisterManagerValidator.isAddressValid("4/2  perumal kovil west street,Thachanallur,Tirunelveli-627 358");
+			assertTrue(isValid);
+		} catch (ValidationException e) {
+			fail();
 		}
 	}
 }
