@@ -50,6 +50,7 @@ function register(){
 	else
 		{
 		alert(message);
+
 		}
 		
 		}
