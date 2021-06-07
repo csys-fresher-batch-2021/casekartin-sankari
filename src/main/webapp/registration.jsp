@@ -50,7 +50,6 @@ function register(){
 	else
 		{
 		alert(message);
-		window.location.href="registration.jsp";
 		}
 		
 		}
