@@ -58,13 +58,6 @@ public class RegisterManager {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	@Override
-	public String toString() {
-		return "RegistrationModel [name=" + name + ", email=" + email + ", mobileNum=" + mobileNum + ", address="
-				+ address + ", createdDate=" + createdDate + ", modifiedDate=" + modifiedDate + ", userName=" + userName
-				+ ", password=" + password + ", id=" + id + "]";
-	}
 
 	
 	private int id;
