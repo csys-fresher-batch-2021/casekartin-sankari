@@ -17,8 +17,8 @@
 			<input type="password" id="password" name="password" placeholder="Password" 
 				required autofocus /> <br />
 			<br />
-			<input type="radio" name="role" id="role" value="admin"><label for="admin">Admin</label>
-			<input type="radio" name="role" id="role" value="user"><label for="user">User</label>
+			<input type="radio" name="role" id="role" value="admin" required><label for="admin">Admin</label>
+			<input type="radio" name="role" id="role" value="user" required><label for="user">User</label>
 			<br /><br/>
 			<button class="btn btn-info"type="submit">Login</button>
 			<button type="reset" class="btn btn-info">Reset</button>		

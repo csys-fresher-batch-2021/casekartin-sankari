@@ -18,6 +18,14 @@
 			<br />
 			<button type="submit" class="btn btn-info">Submit</button>
 		</form>
+		<%
+		String message = (String) session.getAttribute("MESSAGE");
+		if (message != null) {
+		%>
+		<p class="text-danger"><%=message%></p>
+		<%
+		}
+		%>
 	</main>
 </body>
 </html>
