@@ -26,10 +26,4 @@ public class CaseManager {
 		this.status=status;
 	}
 
-	// to string method is used to return the case Types
-	@Override
-	public String toString() {
-		return "CaseManager [caseType=" + caseType + ", cost=" + cost + ", status=" + status + "]";
-	}
-
 }
