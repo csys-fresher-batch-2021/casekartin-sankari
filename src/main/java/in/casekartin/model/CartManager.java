@@ -1,5 +1,6 @@
 package in.casekartin.model;
-
+import lombok.Data;
+@Data
 public class CartManager{
 	
 	public String getCaseName() {

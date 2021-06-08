@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import in.casekartin.exception.ServiceException;
 import in.casekartin.service.LoginService;
+import in.casekartin.session.DataGlob;
 
 /**
  * Servlet implementation class LoginServlet
@@ -39,6 +40,7 @@ public class LoginServlet extends HttpServlet {
 		try {
 			LoginService.isloginSuccess(userName, password,role);
 			session.setAttribute("LOGGED_IN_USER", userName);
+			//DataGlob.addToSession((HttpSession)userName);
 			session.setAttribute("ROLE", role);
 			message = "true";
 

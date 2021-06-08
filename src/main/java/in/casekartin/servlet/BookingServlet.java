@@ -24,8 +24,10 @@ public class BookingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	/**
+	 * @throws IOException 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String caseType=request.getParameter("caseType");
 		String mobileBrand=request.getParameter("mobileBrand");	
@@ -39,19 +41,25 @@ public class BookingServlet extends HttpServlet {
 		cart.setCaseName(caseType);
 		cart.setMobileBrand(mobileBrand);
 		cart.setMobileModel(mobileModel);
-		cart.setPrice(Float.parseFloat(price));
-		cart.setNoOfCases(Integer.parseInt(noOfCases));
+		try {
+			cart.setPrice(Float.parseFloat(price));
+			cart.setNoOfCases(Integer.parseInt(noOfCases));
+		} catch (NumberFormatException e1) {
+			
+			e1.printStackTrace();
+		}
 		
 		Gson gson = new Gson();
 		String message=null;
+		String json=null;
 		try {
 			CartManagerService.addCartToBookedDetails(cart,userName);
-			message="true";
+			message="true";		
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			message=e.getMessage();
 		}
-		String json = gson.toJson(message);
+		json=gson.toJson(message);
 		PrintWriter out = response.getWriter();
 		out.print(json);
 		out.flush();

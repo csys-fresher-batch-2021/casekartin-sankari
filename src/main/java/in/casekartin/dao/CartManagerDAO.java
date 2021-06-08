@@ -25,7 +25,6 @@ public class CartManagerDAO {
 		return cartManagerDAO;
 	}
 	public boolean save(CartManager cartDetails,String userName) {
-		System.out.println(jdbcTemplate);
 		int userId = findIdByUserName(userName);
 		Object[] params = { cartDetails.getCaseName(),cartDetails.getMobileBrand(),cartDetails.getMobileModel(),cartDetails.getNoOfCases(),userId,cartDetails.getPrice()};
 		int rows = jdbcTemplate.update("insert into cart(casename,mobilebrand,mobilemodel,noofcases,user_id,price) values ( ?,?,?,?,?,?) ", params );
@@ -64,7 +63,6 @@ public class CartManagerDAO {
 	}
 	private static int findIdByUserName(String userName) {
 		String sql = "select id from userdetails where username = ?";
-		Integer userId =jdbcTemplate.queryForObject(sql,Integer.class,userName);
-		return userId;
+		return jdbcTemplate.queryForObject(sql,Integer.class,userName);
 	}
 }

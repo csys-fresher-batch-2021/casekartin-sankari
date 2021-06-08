@@ -71,8 +71,7 @@ public class ConnectionUtil {
 	// Spring Jdbc - method
 	public static JdbcTemplate getJdbcTemplate() {
 		DataSource dataSource = getDataSource();
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		return jdbcTemplate;
+		return new JdbcTemplate(dataSource);
 	}
 	private static DataSource getDataSource() {
 		//DataSource
