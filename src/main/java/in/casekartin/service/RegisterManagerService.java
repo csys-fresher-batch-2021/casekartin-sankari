@@ -68,7 +68,7 @@ public class RegisterManagerService {
 			regDetails=regDAO.getUserDetailsByUserName(userName);
 		}catch(DBException e){
 			e.printStackTrace();
-			throw new ServiceException("Unble to display details");
+			throw new ServiceException("Unable to display details");
 		}
 		return regDetails;				
 	}

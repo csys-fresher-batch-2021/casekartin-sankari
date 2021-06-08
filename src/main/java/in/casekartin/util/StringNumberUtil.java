@@ -68,4 +68,19 @@ public class StringNumberUtil {
 			throw new ValidationException("Invalid Cost");
 		}
 	}
+	/**
+	 * check whether cost is greater than 0
+	 * method overloading
+	 * @param cost
+	 * @return
+	 */
+	public static boolean positiveNumberUtil(int cost) throws ValidationException {
+		boolean isValid;
+		if (cost > 0) {
+			isValid = true;
+			return isValid;
+		} else {
+			throw new ValidationException("Invalid Cost");
+		}
+	}
 }

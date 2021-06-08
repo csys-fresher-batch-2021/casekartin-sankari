@@ -46,6 +46,7 @@ function getAllUsers(){
 			"</td><td>"+userList.createdDate+
 			"</td><td>"+userList.modifiedDate+
 			"</td><td>"+userList.userName+
+			"</td></tr>";
 			serial++;
 		}
 		console.log(content);
