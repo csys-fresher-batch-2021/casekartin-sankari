@@ -14,7 +14,6 @@ import com.google.gson.Gson;
 
 import in.casekartin.exception.ServiceException;
 import in.casekartin.service.LoginService;
-import in.casekartin.session.DataGlob;
 
 /**
  * Servlet implementation class LoginServlet
