@@ -1,0 +1,33 @@
+CREATE TABLE mobiletypes
+(
+    id serial,
+    mobilebrand character varying(50) NOT NULL,
+    mobilemodel character varying(50) NOT NULL,
+    numberofcases integer NOT NULL,
+    status character varying NOT NULL default 'active',
+    PRIMARY KEY (id),
+	unique(mobilebrand,mobilemodel)
+);
+
+CREATE TABLE casetypes
+(
+	id serial,
+    casename character varying(100) NOT NULL UNIQUE,
+    price double precision NOT NULL,
+    status character varying(10) NOT NULL default 'active',
+    PRIMARY KEY (id)
+);
+CREATE TABLE userdetails
+(
+    id serial,
+    name character varying(50) NOT NULL,
+    username character varying(10) NOT NULL unique,
+    password character varying(10) NOT NULL,
+    mobilenumber bigint NOT NULL,
+    createddate timestamp without time zone NOT NULL,
+    modifieddate timestamp with time zone NOT NULL,
+    email character varying unique,
+    address character varying(100) NOT NULL,
+	status character varying NOT NULL default 'active',
+    PRIMARY KEY (id)
+);

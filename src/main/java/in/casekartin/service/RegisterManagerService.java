@@ -37,7 +37,9 @@ public class RegisterManagerService {
 			throw new ServiceException(e.getMessage(),e);
 		}catch(DBException e)
 		{
-			throw new ServiceException(e.getMessage(),e);
+
+			throw new ServiceException("You are Already Registered");
+
 		}
 		return true;			
 	}
