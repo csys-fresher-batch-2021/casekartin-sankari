@@ -30,7 +30,6 @@ public class CartManagerService {
 		try {
 			cartDetails=cartDAO.getDetailsByUserName(userName);
 		} catch (DBException e) {
-			e.printStackTrace();
 			throw new ServiceException(e.getMessage(),e);
 		}
 		return cartDetails;

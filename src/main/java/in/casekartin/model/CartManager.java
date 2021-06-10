@@ -1,8 +1,14 @@
 package in.casekartin.model;
+import java.io.Serializable;
+
 import lombok.Data;
 @Data
-public class CartManager{
-	
+public class CartManager implements Serializable{
+		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -151346536930669831L;
 	public String getCaseName() {
 		return caseName;
 	}

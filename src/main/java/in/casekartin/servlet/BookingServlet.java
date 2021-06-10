@@ -2,6 +2,7 @@ package in.casekartin.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,13 +23,13 @@ import in.casekartin.service.CartManagerService;
 @WebServlet("/BookingServlet")
 public class BookingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	final Logger logger = Logger.getLogger(this.getClass().getName());
 	/**
 	 * @throws IOException 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		String caseType=request.getParameter("caseType");
 		String mobileBrand=request.getParameter("mobileBrand");	
 		String mobileModel=request.getParameter("mobileModel");	
@@ -60,9 +61,15 @@ public class BookingServlet extends HttpServlet {
 			message=e.getMessage();
 		}
 		json=gson.toJson(message);
-		PrintWriter out = response.getWriter();
-		out.print(json);
-		out.flush();
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			out.print(json);
+			out.flush();
+		} catch (IOException e) {
+			logger.info(e.getMessage());
+		}
+
 	}
 
 }

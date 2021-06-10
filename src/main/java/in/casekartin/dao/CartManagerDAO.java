@@ -53,7 +53,6 @@ public class CartManagerDAO {
 				listCartDetails.add(cartDetails);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
 			throw new DBException("Unable to display details");
 		} finally {
 

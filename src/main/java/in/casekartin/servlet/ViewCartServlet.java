@@ -28,7 +28,7 @@ public class ViewCartServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 					HttpSession session=request.getSession();
 					String userName = (String) session.getAttribute("LOGGED_IN_USER");
 		try {
@@ -38,7 +38,7 @@ public class ViewCartServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.print(json);
 			out.flush();
-		}catch(ServiceException e) {
+		}catch(ServiceException | IOException e) {
 			e.printStackTrace();
 		}
 	}

@@ -19,10 +19,10 @@
 	   String cost=request.getParameter("price");
 	%>
 		<label for="caseType">Case Type</label> <input type="text"
-			name="caseType" id="caseType" value="<%=cases %>" readonly required /><br />
+			name="caseType" id="caseType" value="<%=cases %>" readonly /><br />
 		<br />
 		<label for="price">Price</label> <input type="text"
-			name="price" id="price" value="<%=cost %>" readonly required /><br />
+			name="price" id="price" value="<%=cost %>" readonly /><br />
 		<br />
 		<br /> <label for="mobileBrand">Select Mobile Brand *</label> <select
 			name="mobileBrand" id="mobileBrand" required>

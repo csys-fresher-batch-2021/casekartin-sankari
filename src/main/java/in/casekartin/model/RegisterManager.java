@@ -1,9 +1,14 @@
 package in.casekartin.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class RegisterManager {
+public class RegisterManager implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1463832976906555813L;
 	public String getName() {
 		return name;
 	}
