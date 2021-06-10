@@ -67,9 +67,8 @@
 			else{
 				alert("Cases not sufficient");
 			}
-		})
+		});
 	}
-	booking();
 	</script>
 </body>
 </html>

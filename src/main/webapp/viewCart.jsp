@@ -2,42 +2,46 @@
 <html lang="en">
 <head>
 <title>Display Users</title>
+<style>
+.center {
+  padding: 250px 0;
+  text-align: center;
+}
+</style>
 </head>
+<%@page import="in.casekartin.model.CartManager" %>
+<%@page import="java.util.List" %>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<main class="container-fluid">
-	<%		
-		String userName = (String) session.getAttribute("LOGGED_IN_USER");
-		%>
-		<h3>List Of item</h3>
-		<table class="table table-bordered">
-			<caption>List of item</caption>
-			<thead>
-				<tr>
-					<th id="">S.No</th>
-					<th id="caseName">Case Name</th>
-					<th id="mobileBrand">Mobile Brand</th>
-					<th id="mobileModel">Mobile Model</th>
-					<th id="price">Price</th>
-					<th id="noOfCases">Number Of Cases</th>
-				</tr>
-			</thead>
-			<tbody id="cart-table">
-			</tbody>
-		</table>
+	<main class="container-fluid" id="table">
+					
+					
 	</main>
 	<script type="text/javascript">		
 
 		function getCartdetails(){
-			let url = "ViewCartServlet?userName=<%=userName%>";
+			let url = "ViewCartServlet";
 			
 			fetch(url).then(res=> res.json()).then(res=>{
 				let cartDetails = res;
 				console.log(cartDetails);
-				
 				let content = "";
 				let serial=1;
-				for(let cartList of cartDetails){ 
+				
+				if(cartDetails.length==0){
+					
+					content="<p class=\"center\" style=\"text-align:center\">Your Cart is Empty</p>";
+				}else{
+					
+					content="<h3>List Of item</h3><table class=\"table table-bordered\" ><caption>List of item</caption><thead><tr>"+
+					"<th >S.No</th>"+
+					"<th >Case Name</th>"+
+					"<th >Mobile Brand</th>"+
+					"<th >Mobile Model</th>"+
+					"<th >Price</th>"+
+					"<th >Number Of Cases</th>"+
+					"</tr>";
+			for(let cartList of cartDetails){ 
 					
 					console.log(cartList.noOfCases);
 					content += "<tr><td>"+serial+
@@ -50,8 +54,10 @@
 					serial++;
 					
 				}
+				content="</thead><tbody></tbody></table>";
+				}
 				console.log(content);
-				document.querySelector("#cart-table").innerHTML= content;
+				document.querySelector("#table").innerHTML= content;
 			})	
 		}
 		getCartdetails();

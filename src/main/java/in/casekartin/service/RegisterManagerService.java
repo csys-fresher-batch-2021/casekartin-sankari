@@ -37,7 +37,7 @@ public class RegisterManagerService {
 			throw new ServiceException(e.getMessage(),e);
 		}catch(DBException e)
 		{
-			e.printStackTrace();
+			throw new ServiceException(e.getMessage(),e);
 		}
 		return true;			
 	}
