@@ -1,20 +1,16 @@
 package in.casekartin.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+
 import in.casekartin.exception.DBException;
 import in.casekartin.model.CartManager;
 import in.casekartin.util.ConnectionUtil;
 public class CartManagerDAO {
-	Connection connection = null;
-	PreparedStatement pst = null;
-	ResultSet rs = null;
+
 	private static JdbcTemplate jdbcTemplate=ConnectionUtil.getJdbcTemplate();
 	
 	//Single Object Created 
@@ -26,42 +22,44 @@ public class CartManagerDAO {
 	}
 	public boolean save(CartManager cartDetails,String userName) {
 		int userId = findIdByUserName(userName);
-		Object[] params = { cartDetails.getCaseName(),cartDetails.getMobileBrand(),cartDetails.getMobileModel(),cartDetails.getNoOfCases(),userId,cartDetails.getPrice()};
-		int rows = jdbcTemplate.update("insert into cart(casename,mobilebrand,mobilemodel,noofcases,user_id,price) values ( ?,?,?,?,?,?) ", params );
+		Object[] params = { cartDetails.getCaseName(),cartDetails.getMobileBrand(),cartDetails.getMobileModel(),cartDetails.getNoOfCases(),userId,cartDetails.getPrice(),cartDetails.getFriendsName()};
+		int rows = jdbcTemplate.update("insert into cart(case_name,mobile_brand,mobile_model,no_of_cases,user_id,price,friends_name) values ( ?,?,?,?,?,?,?) ", params );
 		return rows==1;
 		
 	}
+	
 	public List<CartManager> getDetailsByUserName(String userName) throws DBException {
-		List<CartManager> listCartDetails= new ArrayList<>();
+		List<CartManager> listCartDetails = null;
 		try {
-			connection = ConnectionUtil.getConnection();
 			int userId = findIdByUserName(userName);
-			// Retrieve data from table
-			String sql = "select * from cart as c inner join userdetails as u on c.user_id=u.id where u.id=?";
-			pst = connection.prepareStatement(sql);
-			pst.setInt(1,userId);
-			rs = pst.executeQuery();
-			while (rs.next()) {
-				// Store the data in model
-				CartManager cartDetails =new CartManager();
-				// Store all products in list
-				cartDetails.setCaseName(rs.getString("casename"));
+			String sql = "select c.id,c.case_name,c.price,c.mobile_brand,c.mobile_model,c.no_of_cases from cart as c inner join userdetails as u on c.user_id=u.id where c.status='active' and u.id=?";
+			Object[] params = { userId };
+			listCartDetails = jdbcTemplate.query(sql, (rs,rowNo)->{
+				CartManager cartDetails = new CartManager();
+				cartDetails.setOrderId(rs.getInt("id"));
+				cartDetails.setCaseName(rs.getString("case_name"));
 				cartDetails.setPrice(rs.getFloat("price"));
-				cartDetails.setMobileBrand(rs.getString("mobilebrand"));
-				cartDetails.setMobileModel(rs.getString("mobilemodel"));
-				cartDetails.setNoOfCases(rs.getInt("noofcases"));
-				listCartDetails.add(cartDetails);
-			}
-		} catch (ClassNotFoundException | SQLException e) {
+				cartDetails.setMobileBrand(rs.getString("mobile_brand"));
+				cartDetails.setMobileModel(rs.getString("mobile_model"));
+				cartDetails.setNoOfCases(rs.getInt("no_of_cases"));
+				return cartDetails;
+			}, params);
+		} catch (DataAccessException e) {
 			throw new DBException("Unable to display details");
-		} finally {
-
-			ConnectionUtil.close(connection, pst, rs);
 		}
 		return listCartDetails;
+		
 	}
+
 	private static int findIdByUserName(String userName) {
-		String sql = "select id from userdetails where username = ?";
+		String sql = "select id from userdetails where user_name = ?";
 		return jdbcTemplate.queryForObject(sql,Integer.class,userName);
+	}
+	public Integer removeFromCart(int id) {
+		System.out.println(id);
+		String sql = "update cart set status='inactive' WHERE id=?";
+		Integer result=jdbcTemplate.queryForObject(sql,Integer.class,id);
+		System.out.println(result);
+		return result;
 	}
 }

@@ -16,10 +16,8 @@ import in.casekartin.model.RegisterManager;
 import in.casekartin.util.ConnectionUtil;
 
 public class RegisterManagerDAO {
-	Connection connection = null;
-	PreparedStatement pst = null;
-	ResultSet rs = null;
-	private static final String USER_NAME = "username";
+
+	private static final String USER_NAME = "user_name";
 
 	/**
 	 * Add the user details to table
@@ -29,6 +27,8 @@ public class RegisterManagerDAO {
 	 * @throws DBException
 	 */
 	public boolean addRegDetails(RegisterManager regDetails) throws DBException {
+		Connection connection = null;
+		PreparedStatement pst = null;
 		regDetails.setCreatedDate(LocalDate.now());
 		regDetails.setModifiedDate(LocalDateTime.now());
 		// Get Connection
@@ -36,7 +36,7 @@ public class RegisterManagerDAO {
 		try {
 			connection = ConnectionUtil.getConnection();
 			// prepare data
-			String sql = "insert into userdetails (name,username,password,mobilenumber,createddate,modifieddate,email,address) values (?,?,?,?,?,?,?,?)";
+			String sql = "insert into userdetails (name,user_name,password,mobile_number,created_date,modified_date,email,address) values (?,?,?,?,?,?,?,?)";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, regDetails.getName());
 			pst.setString(2, regDetails.getUserName());
@@ -71,18 +71,21 @@ public class RegisterManagerDAO {
 	 * @throws Exception
 	 */
 	public RegisterManager getUserDetailsByUserName(String userName) throws DBException {
+		Connection connection = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
 		RegisterManager userDetails = new RegisterManager();
 		try {
 			connection = ConnectionUtil.getConnection();
 			// Retrieve data from table
-			String sql = "select * from userdetails where username=?";
+			String sql = "select name,user_name,mobile_number,email,address from userdetails where user_name=?";
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, userName);
 			rs = pst.executeQuery();
 			rs.next();
 			String name = rs.getString("name");
 			String userNameRs = rs.getString(USER_NAME);
-			String mobileNum = String.valueOf(rs.getLong("mobilenumber"));
+			String mobileNum = String.valueOf(rs.getLong("mobile_number"));
 			String email = rs.getString("email");
 			String address = rs.getString("address");
 
@@ -109,21 +112,24 @@ public class RegisterManagerDAO {
 	 * @throws Exception
 	 */
 	public List<RegisterManager> getAllDetails() throws DBException {
+		Connection connection = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
 		List<RegisterManager> listUserDetails = new ArrayList<>();
 		try {
 			connection = ConnectionUtil.getConnection();
 			// Retrieve data from table
-			String sql = "select * from userdetails";
+			String sql = "select name,user_name,mobile_number,email,address,created_date,modified_date from userdetails";
 			pst = connection.prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				String name = rs.getString("name");
 				String userName = rs.getString(USER_NAME);
-				String mobileNum = String.valueOf(rs.getLong("mobilenumber"));
+				String mobileNum = String.valueOf(rs.getLong("mobile_number"));
 				String email = rs.getString("email");
 				String address = rs.getString("address");
-				LocalDate createdDate = rs.getDate("createddate").toLocalDate();
-				LocalDateTime modifiedDate = rs.getTimestamp("modifieddate").toLocalDateTime();
+				LocalDate createdDate = rs.getDate("created_date").toLocalDate();
+				LocalDateTime modifiedDate = rs.getTimestamp("modified_date").toLocalDateTime();
 				// Store the data in model
 				RegisterManager userDetails = new RegisterManager();
 				// Store all products in list
@@ -147,10 +153,13 @@ public class RegisterManagerDAO {
 	}
 
 	public boolean isLoginVerified(String userName, String password) throws DBException {
+		Connection connection = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
 		boolean isValidUser = false;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String query = "select username from userdetails where username=? and password=?";
+			String query = "select user_name from userdetails where user_name=? and password=?";
 			pst = connection.prepareStatement(query);
 			pst.setString(1, userName);
 			pst.setString(2, password);

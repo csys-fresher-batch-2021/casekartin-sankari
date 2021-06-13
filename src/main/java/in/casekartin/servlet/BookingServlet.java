@@ -35,19 +35,20 @@ public class BookingServlet extends HttpServlet {
 		String mobileModel=request.getParameter("mobileModel");	
 		String noOfCases=request.getParameter("noOfCases");	
 		String price=request.getParameter("price");	
+		String friendName=request.getParameter("friendName");
 		HttpSession session=request.getSession(); 
 		String userName= (String) session.getAttribute("LOGGED_IN_USER");
-		
 		CartManager cart=new CartManager();
 		cart.setCaseName(caseType);
 		cart.setMobileBrand(mobileBrand);
 		cart.setMobileModel(mobileModel);
+		cart.setFriendsName(friendName);
 		try {
 			cart.setPrice(Float.parseFloat(price));
 			cart.setNoOfCases(Integer.parseInt(noOfCases));
 		} catch (NumberFormatException e1) {
+			logger.info(e1.getMessage());
 			
-			e1.printStackTrace();
 		}
 		
 		Gson gson = new Gson();
@@ -57,7 +58,6 @@ public class BookingServlet extends HttpServlet {
 			CartManagerService.addCartToBookedDetails(cart,userName);
 			message="true";		
 		} catch (ServiceException e) {
-			e.printStackTrace();
 			message=e.getMessage();
 		}
 		json=gson.toJson(message);

@@ -51,7 +51,7 @@ function getAllUsers(){
 		}
 		console.log(content);
 		document.querySelector("#user-table").innerHTML= content;
-	})	
+	});	
 }
 getAllUsers();
 </script>

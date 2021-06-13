@@ -18,21 +18,39 @@ public class CartManagerService {
 		
 		try {
 			StringNumberUtil.positiveNumberUtil(cart.getNoOfCases());
+			cart.setPrice(cart.getPrice()*cart.getNoOfCases());
 			cartDAO.save(cart,userName);
 		} catch (ValidationException e) {
-			throw new ServiceException(e.getMessage(),e);
+			throw new ServiceException("Unable to add details");
 		}
 		
 	}
 
 	public static List<CartManager> listByUserName(String userName) throws ServiceException {
 		List<CartManager> cartDetails=null;
-		try {
-			cartDetails=cartDAO.getDetailsByUserName(userName);
-		} catch (DBException e) {
-			throw new ServiceException(e.getMessage(),e);
-		}
+			try {
+				cartDetails=cartDAO.getDetailsByUserName(userName);
+			} catch (DBException e) {
+				throw new ServiceException("Unable to Display");
+			}
+			
 		return cartDetails;
+	}
+
+	public static boolean cancelOrder(String orderId) throws ServiceException {
+		int id=Integer.parseInt(orderId);
+		boolean isCancelled=false;
+		//cartDAO.removeFromCart(id);
+		if(cartDAO.removeFromCart(id)==1) {
+			isCancelled=true;
+		}
+		else {
+			throw new ServiceException("Unable to Cancel");
+		}
+	
+		return isCancelled;
+		
+		
 	}
 
 }

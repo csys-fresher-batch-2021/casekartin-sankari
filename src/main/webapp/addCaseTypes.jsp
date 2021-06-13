@@ -24,7 +24,7 @@
 		%>
 		<p class="text-danger"><%=message%></p>
 		<%
-		}
+		session.removeAttribute("MESSAGE");}
 		%>
 	</main>
 </body>

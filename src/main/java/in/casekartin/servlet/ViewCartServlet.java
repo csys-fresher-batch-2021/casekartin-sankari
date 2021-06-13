@@ -3,6 +3,7 @@ package in.casekartin.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +24,7 @@ import in.casekartin.service.CartManagerService;
 @WebServlet("/ViewCartServlet")
 public class ViewCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	final Logger logger = Logger.getLogger(this.getClass().getName());
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,7 +41,7 @@ public class ViewCartServlet extends HttpServlet {
 			out.print(json);
 			out.flush();
 		}catch(ServiceException | IOException e) {
-			e.printStackTrace();
+			logger.info(e.getMessage());
 		}
 	}
 

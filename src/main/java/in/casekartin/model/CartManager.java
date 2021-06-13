@@ -45,6 +45,12 @@ public class CartManager implements Serializable{
 	public void setPrice(Float price) {
 		this.price = price;
 	}	
+	public int getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
 
 	String caseName;
 	String mobileBrand;
@@ -52,6 +58,8 @@ public class CartManager implements Serializable{
 	Float price;
 	String friendsName;
 	int noOfCases;
+	int orderId;
+
 	
 
 }

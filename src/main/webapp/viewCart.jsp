@@ -33,32 +33,33 @@
 					content="<p class=\"center\" style=\"text-align:center\">Your Cart is Empty</p>";
 				}else{
 					
-					content="<h3>List Of item</h3><table class=\"table table-bordered\" ><caption>List of item</caption><thead><tr>"+
-					"<th >S.No</th>"+
+					content+="<h3>List Of item</h3><table class=\"table table-bordered\" ><caption>List of item</caption><thead><tr><th >S.No</th>"+
+					"<th >Order Id</th>"+
 					"<th >Case Name</th>"+
 					"<th >Mobile Brand</th>"+
 					"<th >Mobile Model</th>"+
 					"<th >Price</th>"+
 					"<th >Number Of Cases</th>"+
-					"</tr>";
+					"</tr></thead><tbody>";
 			for(let cartList of cartDetails){ 
 					
-					console.log(cartList.noOfCases);
 					content += "<tr><td>"+serial+
+					"</td><td>"+cartList.orderId+
 					"</td><td>"+cartList.caseName+
 					"</td><td>"+cartList.mobileBrand+
 					"</td><td>"+cartList.mobileModel+
 					"</td><td>Rs."+cartList.price+
-					"/-</td><td>"+cartList.noOfCases+
-					"</td></tr>";
+					"</td><td>"+cartList.noOfCases+
+					"</td><td><a class=\"btn btn-danger\"href=\"DeleteFromCartServlet?orderId="+
+					cartList.orderId+"\">Cancel</a></td></tr>";
 					serial++;
 					
 				}
-				content="</thead><tbody></tbody></table>";
+				content+="</tbody></table>";
 				}
 				console.log(content);
 				document.querySelector("#table").innerHTML= content;
-			})	
+			});	
 		}
 		getCartdetails();
 	
