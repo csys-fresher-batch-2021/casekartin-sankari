@@ -56,10 +56,7 @@ public class CartManagerDAO {
 		return jdbcTemplate.queryForObject(sql,Integer.class,userName);
 	}
 	public Integer removeFromCart(int id) {
-		System.out.println(id);
-		String sql = "update cart set status='inactive' WHERE id=?";
-		Integer result=jdbcTemplate.queryForObject(sql,Integer.class,id);
-		System.out.println(result);
-		return result;
+		return jdbcTemplate.update("update cart set status='inactive' WHERE id=?",id);
+
 	}
 }

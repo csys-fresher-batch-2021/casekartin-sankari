@@ -58,17 +58,19 @@
 	</main>
 	<script type="text/javascript">
 	function booking(){
-		
+		event.preventDefault();
 		let caseType=document.querySelector("#caseType").value;
 		let cost=document.querySelector("#price").value;
 		let friendName=document.querySelector("#friendName").value;
 		let mobileBrand=document.querySelector("#mobileBrand").value;
 		let mobileModel=document.querySelector("#mobileModel").value;
 		let noOfCases=document.querySelector("#noOfCases").value;
+		console.log(noOfCases);
 		const queryParameter="?caseType="+ caseType +"&price="+ cost +"&mobileBrand="+ mobileBrand +"&mobileModel="+ mobileModel +"&noOfCases="+ noOfCases+"&friendName="+friendName;
 		let url = "BookingServlet"+ queryParameter;
-		fetch(url).then(res=> res.json()).then(res=>{  
+		fetch(url).then(res=> res.json()).then(res=>{
 			let message=res;
+			console.log(message);
 			if(message=="true" )
 				{
 					alert("Added to cart Successfully");
@@ -77,9 +79,9 @@
 			else{
 				alert("Cases not sufficient");
 			}
-		});
+		}
+		);
 	}
-
 	</script>
 </body>
 </html>

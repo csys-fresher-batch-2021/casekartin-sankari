@@ -2,6 +2,8 @@ package in.casekartin.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import java.util.logging.Logger;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +30,7 @@ public class DeleteFromCartServlet extends HttpServlet {
 			CartManagerService.cancelOrder(orderId);
 			response.sendRedirect("viewCart.jsp");
 		}catch(ServiceException e){
-			e.printStackTrace();
+			e.getMessage();
 		}
 	}
 
