@@ -66,7 +66,7 @@ public class CaseManagerDAO {
 		try {
 			connection = ConnectionUtil.getConnection();
 			// Retrieve data from table
-			String sql = "select * from caseTypes";
+			String sql = "select casename,price,status from caseTypes";
 			pst = connection.prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {

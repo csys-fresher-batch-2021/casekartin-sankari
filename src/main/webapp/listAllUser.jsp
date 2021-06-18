@@ -46,11 +46,12 @@ function getAllUsers(){
 			"</td><td>"+userList.createdDate+
 			"</td><td>"+userList.modifiedDate+
 			"</td><td>"+userList.userName+
+			"</td></tr>";
 			serial++;
 		}
 		console.log(content);
 		document.querySelector("#user-table").innerHTML= content;
-	})	
+	});	
 }
 getAllUsers();
 </script>

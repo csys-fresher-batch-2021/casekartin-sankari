@@ -39,13 +39,13 @@ function getAllCases(){
 			content += "<tr><td>"+serial+
 			"</td><td>"+caselist.caseType+
 			"</td><td>Rs."+caselist.cost+
-			"/-</td ><td><a class=\"btn btn-danger\"href=\"DeleteCaseTypeServlet?caseName="+
+			"</td ><td><a class=\"btn btn-danger\"href=\"DeleteCaseTypeServlet?caseName="+
 					caselist.caseType+"\">Delete</a></td></tr>";
 			serial++;
 		}
 		console.log(content);
 		document.querySelector("#case-table").innerHTML= content;
-	})	
+	});
 }
 getAllCases();
 </script>

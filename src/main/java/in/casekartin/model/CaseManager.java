@@ -1,7 +1,14 @@
 package in.casekartin.model;
 
+import java.io.Serializable;
+
 //create a service class
-public class CaseManager {
+public class CaseManager implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6324952043091827871L;
+
 	public String getCaseType() {
 		return caseType;
 	}

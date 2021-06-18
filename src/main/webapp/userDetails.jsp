@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Your Account</title>
+<title>User Details</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
