@@ -11,6 +11,7 @@ import in.casekartin.util.LoginRegisterUtil;
 import in.casekartin.validator.RegisterManagerValidator;
 
 public class RegisterManagerService {
+	private static final String ERROR_MESSAGE = "Unable to display details";
 	private RegisterManagerService(){
 		//default Constructor
 	}
@@ -59,7 +60,7 @@ public class RegisterManagerService {
 			}
 			return userDetails;
 		}catch(DBException e){
-			throw new ServiceException("Unable to display details");
+			throw new ServiceException(ERROR_MESSAGE);
 		}
 		
 				
@@ -75,11 +76,11 @@ public class RegisterManagerService {
 		try {
 			regDetails=regDAO.getUserDetailsByUserName(userName);
 			if(regDetails==null) {
-				throw new ServiceException("Unable to display details");
+				throw new ServiceException(ERROR_MESSAGE);
 			}
 			return regDetails;	
 		}catch(DBException e){
-			throw new ServiceException("Unable to display details");
+			throw new ServiceException(ERROR_MESSAGE);
 		}
 					
 	}

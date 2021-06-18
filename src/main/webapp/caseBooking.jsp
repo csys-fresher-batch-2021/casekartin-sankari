@@ -17,12 +17,14 @@
 			<br />
 			<%
 			String caseName = request.getParameter("caseType");
+			String  caseType= org.owasp.encoder.Encode.forHtml(caseName);
 			String cost = request.getParameter("price");
+			String  price= org.owasp.encoder.Encode.forHtml(cost);
 			%>
 			<label for="caseType">Case Type</label> <input type="text"
-				name="caseType" id="caseType" value="<%=caseName%>" readonly /><br />
+				name="caseType" id="caseType" value="<%=caseType%>" readonly /><br />
 			<br /> <label for="price">Price</label> <input type="text"
-				name="price" id="price" value="<%=cost%>" readonly /><br /> <br />
+				name="price" id="price" value="<%=price%>" readonly /><br /> <br />
 			<br /> <label for="mobileBrand">Select Mobile Brand *</label> <select
 				name="mobileBrand" id="mobileBrand" required>
 				<option value="" disabled selected hidden>Choose a Mobile
